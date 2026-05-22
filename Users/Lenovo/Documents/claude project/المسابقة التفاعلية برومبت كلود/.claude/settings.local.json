@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Recurse \"c:\\\\Users\\\\Lenovo\\\\Documents\\\\claude project\\\\المسابقة التفاعلية برومبت كلود\\\\qa-app\")",
+      "Bash(Select-Object FullName)",
+      "PowerShell($path = \"c:\\\\Users\\\\Lenovo\\\\Documents\\\\claude project\\\\المسابقة التفاعلية برومبت كلود\\\\qa-app\\\\css\\\\styles.css\"; \\(Get-Content $path\\).Count)",
+      "Bash(ls \"c:\\\\Users\\\\Lenovo\\\\.claude\\\\projects\\\\c--\\\\memory\\\\\" 2>/dev/null || echo \"dir may not exist\")",
+      "Read(//c/Users/Lenovo/.claude/projects/c--/memory\" 2>/dev/**)",
+      "Bash(node build.js)"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+"appTitle": "سباق الأبطال - لغتي",
+"subject": { "id": "languages", "name": "لغتي", "icon": "📖", "color": "#10b981" },
+"grade": "الصف الثالث الابتدائي",
+"units": [{
+"id": "u1", "name": "الوحدة الأولى", "order": 1,
+"questions": [
+{ "text": "سؤال؟", "choices": ["أ","ب","ج","د"], "correctIndex": 0 }
+]
+}]
+}

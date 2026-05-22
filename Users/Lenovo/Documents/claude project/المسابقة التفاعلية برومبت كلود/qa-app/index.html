@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سباق الأبطال — أسئلة تفاعلية للصف الثالث الابتدائي</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- حاوية الشاشات الرئيسية -->
+  <main id="app-container">
+
+    <!-- شاشة الإعداد الأولي -->
+    <section id="screen-setup" class="screen active">
+      <!-- العنوان الرئيسي -->
+      <header class="setup-header">
+        <h1 class="setup-title">🏆 سباق الأبطال 🏆</h1>
+        <p class="setup-subtitle" id="setup-subtitle-grade">أسئلة تفاعلية — لغتي — الصف الثالث الابتدائي</p>
+      </header>
+
+      <!-- كرت الإعداد -->
+      <div class="setup-card">
+
+        <!-- قسم بيانات المعلمة -->
+        <div class="setup-section">
+          <h2 class="section-title">📝 بيانات المعلمة</h2>
+          <div class="form-fields">
+            <label class="field">
+              <span class="field-label">اسم المعلمة</span>
+              <input type="text" id="input-teacher-name" class="field-input" placeholder="مثال: أ. فاطمة" autocomplete="off">
+            </label>
+            <label class="field">
+              <span class="field-label">اسم المدرسة</span>
+              <input type="text" id="input-school-name" class="field-input" placeholder="مثال: مدرسة النور الابتدائية" autocomplete="off">
+            </label>
+            <label class="field">
+              <span class="field-label">اسم المسابقة</span>
+              <input type="text" id="input-competition-name" class="field-input" value="سباق الأبطال" autocomplete="off">
+            </label>
+          </div>
+        </div>
+
+        <!-- قسم اختيار الفصول -->
+        <div class="setup-section">
+          <h2 class="section-title">📚 حدّدي الفصول التي تدرّسينها</h2>
+          <div class="classes-grid">
+
+            <div class="classes-column boys-column">
+              <h3 class="column-title">فصول الأولاد</h3>
+              <div class="checkbox-list" id="boys-classes">
+                <!-- تُولَّد بـ JS: ثالث أولاد (1) إلى (6) -->
+              </div>
+            </div>
+
+            <div class="classes-column girls-column">
+              <h3 class="column-title">فصول البنات</h3>
+              <div class="checkbox-list" id="girls-classes">
+                <!-- تُولَّد بـ JS: ثالث بنات (1) إلى (6) -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- زر الموافقة -->
+        <div class="setup-actions">
+          <button type="button" id="btn-setup-confirm" class="btn-primary" disabled>موافق ✓</button>
+          <p class="setup-hint" id="setup-hint">عبّئي الحقول واختاري فصلاً واحداً على الأقل لتفعيل الزر</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- الشريط العلوي الثابت (يظهر في جميع الشاشات بعد الإعداد) -->
+    <header id="top-bar" class="top-bar hidden">
+      <div class="top-bar-content">
+        <div class="top-bar-tools">
+          <button type="button" id="btn-font-decrease" class="btn-icon" title="تصغير الخط (-)">
+            <span class="ft-icon">🔤</span><span class="ft-sign">−</span>
+          </button>
+          <button type="button" id="btn-font-increase" class="btn-icon" title="تكبير الخط (+)">
+            <span class="ft-icon">🔤</span><span class="ft-sign">+</span>
+          </button>
+          <button type="button" id="btn-shortcuts-help" class="btn-icon" title="اختصارات لوحة المفاتيح">⌨️</button>
+          <button type="button" id="btn-sound-toggle" class="btn-icon" title="إيقاف الأصوات">🔊</button>
+        </div>
+        <div class="top-bar-info">
+          <span class="top-bar-brand">🏆 <span id="tb-competition-name">سباق الأبطال</span></span>
+          <span class="top-bar-sep">•</span>
+          <span id="tb-teacher-name">المعلمة</span>
+          <span class="top-bar-sep">•</span>
+          <span id="tb-school-name">المدرسة</span>
+          <span class="top-bar-sep">•</span>
+          <span class="top-bar-subject-icon" id="tb-subject-icon">📖</span>
+          <span class="top-bar-subject" id="tb-subject-name">لغتي</span>
+          <span class="top-bar-sep">•</span>
+          <span class="top-bar-grade" id="tb-grade">الصف الثالث الابتدائي</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- شاشة الفصول -->
+    <section id="screen-classes" class="screen">
+      <div class="classes-wrap">
+        <h1 class="classes-page-title">📚 اختاري الفصل</h1>
+
+        <div class="classes-display-grid">
+          <!-- عمود الأولاد -->
+          <div class="classes-display-column boys-column" id="display-boys-classes">
+            <h2 class="column-title">فصول الأولاد</h2>
+            <div class="class-cards-list" id="boys-cards-list">
+              <!-- تُولَّد ديناميكياً -->
+            </div>
+            <p class="empty-column-msg" id="boys-empty-msg" style="display:none;">لم تختاري فصول أولاد</p>
+          </div>
+
+          <!-- عمود البنات -->
+          <div class="classes-display-column girls-column" id="display-girls-classes">
+            <h2 class="column-title">فصول البنات</h2>
+            <div class="class-cards-list" id="girls-cards-list">
+              <!-- تُولَّد ديناميكياً -->
+            </div>
+            <p class="empty-column-msg" id="girls-empty-msg" style="display:none;">لم تختاري فصول بنات</p>
+          </div>
+        </div>
+
+        <div class="classes-footer-actions">
+          <button type="button" id="btn-edit-classes" class="btn-secondary">تعديل الفصول المختارة ✎</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة إضافة الطلاب/الطالبات -->
+    <section id="screen-add-students" class="screen">
+      <div class="add-students-wrap">
+
+        <div class="screen-toolbar">
+          <button type="button" id="btn-back-to-classes-1" class="btn-back">← رجوع للفصول</button>
+        </div>
+
+        <h1 class="add-students-title">
+          <span class="add-icon">➕</span>
+          <span id="add-students-action-label">إضافة طلاب</span>
+          <span class="add-students-sep">—</span>
+          <span id="add-students-class-label">—</span>
+        </h1>
+
+        <div class="add-students-card">
+          <p class="add-students-hint">
+            💡 اكتبي أسماء <span id="hint-gender-word">الطلاب</span> أو الصقيها هنا،
+            بحيث يكون كل اسم في سطر مستقل
+          </p>
+
+          <textarea id="students-textarea" class="students-textarea"
+            placeholder="خالد أحمد العتيبي&#10;فيصل محمد القحطاني&#10;عبدالله سعد الشمري&#10;..."></textarea>
+
+          <div class="add-students-meta">
+            <span>عدد الأسماء المُدخَلة:</span>
+            <span class="counter-value" id="students-counter">0</span>
+            <span id="counter-word">طلاب</span>
+          </div>
+
+          <div class="add-students-actions">
+            <button type="button" id="btn-save-students" class="btn-primary" disabled>حفظ 💾</button>
+            <button type="button" id="btn-cancel-students" class="btn-secondary">إلغاء</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شاشة طلاب الفصل -->
+    <section id="screen-class-students" class="screen">
+      <div class="class-students-wrap">
+
+        <div class="screen-toolbar">
+          <button type="button" id="btn-back-to-classes-2" class="btn-back">← رجوع للفصول</button>
+        </div>
+
+        <h1 class="class-students-title">
+          <span>👥</span>
+          <span id="cs-class-label">—</span>
+          <span class="cs-sep">—</span>
+          <span class="cs-count-wrap">
+            <span id="cs-students-count">0</span>
+            <span id="cs-students-word">طلاب</span>
+          </span>
+        </h1>
+
+        <div class="class-students-card" id="class-students-card">
+
+          <!-- وضع العرض -->
+          <div id="cs-view-mode">
+            <div class="students-list" id="cs-students-list">
+              <!-- تُولَّد ديناميكياً -->
+            </div>
+            <div class="cs-actions">
+              <button type="button" id="btn-continue-to-subjects" class="btn-primary">متابعة للوحدات ▶</button>
+              <button type="button" id="btn-edit-students" class="btn-secondary">تعديل الطلاب ✎</button>
+            </div>
+          </div>
+
+          <!-- وضع التعديل -->
+          <div id="cs-edit-mode" style="display:none;">
+            <div class="cs-edit-header">
+              <span class="cs-edit-icon">✎</span>
+              <span>وضع التعديل</span>
+            </div>
+            <div class="students-edit-list" id="cs-students-edit-list">
+              <!-- تُولَّد ديناميكياً -->
+            </div>
+            <button type="button" id="btn-add-student-row" class="btn-add-row">+ إضافة اسم جديد</button>
+            <div class="cs-edit-actions">
+              <button type="button" id="btn-save-edits" class="btn-primary">حفظ التعديلات 💾</button>
+              <button type="button" id="btn-cancel-edits" class="btn-secondary">إلغاء</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- شاشة المواد -->
+    <section id="screen-subjects" class="screen">
+      <div class="subjects-wrap">
+
+        <div class="screen-toolbar with-context">
+          <button type="button" class="btn-back" id="btn-back-to-class-students">
+            ← رجوع لطلاب الفصل
+          </button>
+          <div class="current-context-pill" id="subjects-context-pill">
+            <span class="ctx-icon">👥</span>
+            <span id="ctx-class-name">—</span>
+            <span class="ctx-sep">—</span>
+            <span id="ctx-count">0</span>
+            <span id="ctx-word">طلاب</span>
+          </div>
+        </div>
+
+        <h1 class="subjects-page-title">📖 اختاري المادة</h1>
+
+        <div class="subjects-grid" id="subjects-grid">
+          <!-- بطاقات المواد تُولَّد ديناميكياً -->
+        </div>
+
+        <!-- منطقة الإدارة المتقدّمة (مؤقتاً هنا، ستنتقل لشاشة الإعدادات لاحقاً) -->
+        <div class="subjects-admin-area">
+          <div class="subjects-admin-divider"></div>
+          <button type="button" class="btn-reset-bank" id="btn-reset-bank">
+            🗑️ إعادة تعيين بنك الأسئلة
+          </button>
+          <p class="subjects-admin-hint">
+            لمسح جميع الأسئلة التجريبية الحالية وبدء بنك أسئلة جديد فارغ
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شاشة الوحدات -->
+    <section id="screen-units" class="screen">
+      <div class="units-wrap">
+
+        <div class="screen-toolbar with-context">
+          <button type="button" class="btn-back" id="btn-back-to-subjects">
+            ← رجوع
+          </button>
+          <div class="current-context-pill" id="units-context-pill">
+            <span class="ctx-icon">👥</span>
+            <span id="units-ctx-class">—</span>
+            <span class="ctx-sep">•</span>
+            <span class="ctx-subject-icon" id="units-ctx-subject-icon">📖</span>
+            <span id="units-ctx-subject">—</span>
+          </div>
+        </div>
+
+        <h1 class="units-page-title">📚 اختاري الوحدة</h1>
+
+        <!-- بطاقة الأسئلة الشاملة -->
+        <div class="comprehensive-card-wrap">
+          <div class="comprehensive-card" id="comprehensive-card">
+            <div class="cc-icon">🌟</div>
+            <div class="cc-content">
+              <h2 class="cc-title">أسئلة شاملة (من كل الوحدات)</h2>
+              <p class="cc-subtitle">سحب عشوائي متوازن من جميع وحدات المادة</p>
+            </div>
+            <div class="cc-meta" id="cc-meta">
+              <span class="cc-count" id="cc-count">0</span>
+              <span class="cc-count-label">سؤال إجمالاً</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- فاصل -->
+        <div class="units-divider">
+          <span class="divider-line"></span>
+          <span class="divider-label">الوحدات</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <!-- شبكة الوحدات -->
+        <div class="units-grid" id="units-grid">
+          <!-- بطاقات الوحدات تُولَّد ديناميكياً -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شاشة تعديل أسئلة الوحدة — TASK-J -->
+    <section id="screen-edit-unit" class="screen">
+      <div class="edit-unit-wrap">
+
+        <div class="screen-toolbar with-context">
+          <button type="button" class="btn-back" id="btn-back-from-edit">
+            ← رجوع للوحدات
+          </button>
+          <div class="current-context-pill" id="edit-unit-pill">
+            <span class="ctx-icon">👥</span>
+            <span id="edit-unit-ctx-class">—</span>
+            <span class="ctx-sep">•</span>
+            <span id="edit-unit-ctx-unit">—</span>
+          </div>
+        </div>
+
+        <div class="edit-unit-header">
+          <h1 class="edit-unit-title" id="edit-unit-title">✏️ تعديل الأسئلة</h1>
+          <button type="button" class="btn-restore-all-unit" id="btn-restore-all-unit">
+            ↺ استعادة كل الوحدة للأصل
+          </button>
+        </div>
+
+        <div class="edit-questions-list" id="edit-questions-list">
+          <!-- تُولَّد ديناميكياً -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شاشة إعدادات المسابقة -->
+    <section id="screen-quiz-settings" class="screen">
+      <div class="qs-wrap">
+
+        <div class="screen-toolbar with-context">
+          <button type="button" class="btn-back" id="btn-back-to-units">
+            ← رجوع للوحدات
+          </button>
+          <div class="current-context-pill" id="qs-context-pill">
+            <span class="ctx-icon">👥</span>
+            <span id="qs-ctx-class">—</span>
+            <span class="ctx-sep">•</span>
+            <span id="qs-ctx-subject-icon">📖</span>
+            <span id="qs-ctx-subject">—</span>
+            <span class="ctx-sep">•</span>
+            <span id="qs-ctx-unit">—</span>
+          </div>
+        </div>
+
+        <h1 class="qs-page-title">⚙️ إعدادات المسابقة</h1>
+
+        <div class="qs-card">
+
+          <!-- القسم 1: عدد الأسئلة -->
+          <div class="qs-section">
+            <div class="qs-section-label">
+              <span class="qs-section-icon">🔢</span>
+              <span>عدد الأسئلة</span>
+              <span class="qs-total-badge" id="qs-total-badge">(من أصل 0)</span>
+            </div>
+            <div class="qs-chips" id="qs-count-chips">
+              <button class="qs-chip active" data-value="5">5</button>
+              <button class="qs-chip" data-value="10">10</button>
+              <button class="qs-chip" data-value="15">15</button>
+              <button class="qs-chip" data-value="20">20</button>
+              <button class="qs-chip" data-value="all">الكل</button>
+            </div>
+          </div>
+
+          <div class="qs-divider"></div>
+
+          <!-- القسم 2: عدد المحاولات -->
+          <div class="qs-section">
+            <div class="qs-section-label">
+              <span class="qs-section-icon">🔁</span>
+              <span>محاولات كل سؤال</span>
+            </div>
+            <div class="qs-chips" id="qs-attempts-chips">
+              <button class="qs-chip" data-value="1">1</button>
+              <button class="qs-chip active" data-value="2">2</button>
+              <button class="qs-chip" data-value="3">3</button>
+            </div>
+            <div class="qs-points-info" id="qs-points-info"></div>
+          </div>
+
+          <div class="qs-divider"></div>
+
+          <!-- القسم 3: خلط الخيارات -->
+          <div class="qs-section qs-toggle-section">
+            <div class="qs-section-label">
+              <span class="qs-section-icon">🔀</span>
+              <span>خلط خيارات الإجابة</span>
+            </div>
+            <label class="qs-toggle-label" for="qs-shuffle-toggle">
+              <input type="checkbox" id="qs-shuffle-toggle" class="qs-toggle-input" checked>
+              <span class="qs-toggle-track">
+                <span class="qs-toggle-thumb"></span>
+              </span>
+              <span class="qs-toggle-text" id="qs-toggle-text">مفعّل</span>
+            </label>
+          </div>
+
+          <div class="qs-divider"></div>
+
+          <!-- قسم: وقت الإجابة -->
+          <div class="qs-section">
+            <div class="qs-section-header">
+              <span class="qs-section-icon">⏱️</span>
+              <h2 class="qs-section-title">وقت الإجابة لكل سؤال</h2>
+            </div>
+            <div class="qs-chips" id="qs-time-chips">
+              <button type="button" class="qs-chip selected" data-time="0">بلا وقت</button>
+              <button type="button" class="qs-chip" data-time="30">30 ثانية</button>
+              <button type="button" class="qs-chip" data-time="60">60 ثانية</button>
+              <button type="button" class="qs-chip" data-time="90">90 ثانية</button>
+            </div>
+            <p class="qs-section-hint">عند انتهاء الوقت دون إجابة، تُحتسب محاولة فاشلة. الافتراضي "بلا وقت" مناسب للصفوف الأولية.</p>
+          </div>
+
+          <div class="qs-divider"></div>
+
+          <!-- القسم 4: مراجعة الأسئلة -->
+          <div class="qs-section qs-review-section">
+            <button type="button" class="btn-review-questions" id="btn-review-questions">
+              <span>👁 مراجعة الأسئلة المختارة</span>
+              <span class="qs-review-count" id="qs-review-count">(5 أسئلة)</span>
+            </button>
+          </div>
+
+        </div><!-- .qs-card -->
+
+        <!-- زر البدء -->
+        <div class="qs-start-wrap">
+          <button type="button" class="btn-start-quiz" id="btn-start-quiz">
+            🚀 ابدأ المسابقة
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شاشة السؤال -->
+    <section id="screen-question" class="screen">
+      <div class="qz-wrap">
+
+        <!-- شريط رأس الشاشة -->
+        <div class="qz-header">
+          <div class="qz-context-info">
+            <span class="qz-ctx-icon" id="qz-ctx-subject-icon">📖</span>
+            <span id="qz-ctx-subject">—</span>
+            <span class="ctx-sep">•</span>
+            <span>📚</span>
+            <span id="qz-ctx-unit">—</span>
+          </div>
+          <div class="qz-progress">
+            السؤال
+            <span class="qz-progress-current" id="qz-progress-current">1</span>
+            /
+            <span class="qz-progress-total" id="qz-progress-total">10</span>
+          </div>
+          <button type="button" class="qz-end-btn" id="btn-end-quiz">
+            ⏹ إنهاء المسابقة
+          </button>
+        </div>
+
+        <!-- شريط "من سيجيب؟" -->
+        <div class="qz-answerer-strip" id="qz-answerer-strip">
+          <div class="qz-answerer-left">
+            <button type="button" class="qz-who-btn" id="btn-who-answers" disabled>
+              👤 من سيجيب؟
+            </button>
+            <span class="qz-active-student" id="qz-active-student">— لم يُختر طالب بعد —</span>
+          </div>
+          <div class="qz-answerer-right">
+            <span class="qz-score-pill" id="qz-active-score">⭐ —</span>
+          </div>
+        </div>
+
+        <!-- منطقة السؤال + لوحة النقاط -->
+        <div class="qz-main-layout">
+
+          <!-- شاشة "السؤال جاهز" — تأخذ مكان بطاقة السؤال -->
+          <div class="ready-card-wrap" id="ready-overlay" style="display:none;">
+            <div class="ready-card">
+              <div class="ready-progress">
+                <span>🎯 السؤال</span>
+                <span class="ready-progress-current" id="ready-current">1</span>
+                <span>من</span>
+                <span class="ready-progress-total" id="ready-total">10</span>
+                <span>جاهز</span>
+              </div>
+
+              <div class="ready-selector">
+                <button type="button" class="ready-who-btn" id="ready-who-btn">
+                  👤 من سيجيب؟
+                </button>
+                <p class="ready-hint">اختاري الطالب يدوياً، أو استخدمي قرعة الأسماء من الزر أعلاه</p>
+              </div>
+
+              <div class="ready-selected" id="ready-selected" style="display:none;">
+                <span class="ready-selected-label">الطالب المختار:</span>
+                <div class="ready-selected-name" id="ready-selected-name">—</div>
+              </div>
+
+              <div class="ready-time-info" id="ready-time-info" style="display:none;">
+                <span class="ready-time-icon">⏱️</span>
+                <span>وقت الإجابة:</span>
+                <span class="ready-time-value" id="ready-time-value">—</span>
+              </div>
+
+              <div class="ready-actions">
+                <button type="button" class="ready-show-btn" id="ready-show-btn" disabled>
+                  ▶️ عرض السؤال
+                </button>
+                <button type="button" class="ready-absent-btn" id="ready-absent-btn" disabled>
+                  🚫 الطالب غائب
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- بطاقة السؤال -->
+          <div class="qz-question-card" id="qz-question-card">
+            <!-- شريط الوقت (يظهر فقط إن كان مُفعَّلاً) -->
+            <div class="qz-timer-bar" id="qz-timer-bar" style="display:none;">
+              <div class="qz-timer-fill" id="qz-timer-fill"></div>
+              <div class="qz-timer-label" id="qz-timer-label">⏱️ —</div>
+            </div>
+            <div class="qz-attempts-row">
+              <div class="qz-attempts-stars" id="qz-attempts-stars"></div>
+              <div class="qz-attempts-label" id="qz-attempts-label">لديك 3 محاولات</div>
+            </div>
+            <h2 class="qz-question-text" id="qz-question-text">—</h2>
+            <div class="qz-choices-grid" id="qz-choices-grid"></div>
+            <div class="qz-bottom-actions">
+              <button type="button" class="qz-skip-btn" id="btn-skip-question">⏭️ تخطّي السؤال</button>
+            </div>
+          </div>
+
+          <!-- لوحة النقاط الجانبية -->
+          <aside class="qz-scoreboard" id="qz-scoreboard">
+            <div class="qz-sb-header">
+              <h3 class="qz-sb-title">🏆 لوحة النقاط</h3>
+              <button type="button" class="qz-sb-toggle" id="qz-sb-toggle" title="طيّ/توسيع">
+                <span class="qz-sb-toggle-icon">«</span>
+              </button>
+            </div>
+            <ol class="qz-sb-list" id="qz-sb-list"></ol>
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شاشة الفائز (تظهر قبل قائمة الشرف) -->
+    <section id="screen-winner" class="screen">
+      <div class="winner-sparkles" id="winner-sparkles"></div>
+      <div class="winner-wrap">
+
+        <!-- المرحلة 1: طبل + تشويق -->
+        <div class="winner-phase" id="winner-phase-1" style="display:none;">
+          <div class="winner-drum">🥁</div>
+          <p class="winner-suspense">لحظات وسنُعلن الفائز…</p>
+        </div>
+
+        <!-- المرحلة 2: كشف المركز -->
+        <div class="winner-phase" id="winner-phase-2" style="display:none;">
+          <div class="winner-rank-row">
+            <span class="winner-rank-sparkle">✨</span>
+            <span class="winner-rank-label">المركز الأول</span>
+            <span class="winner-rank-sparkle">✨</span>
+          </div>
+        </div>
+
+        <!-- المرحلة 3: الفائز -->
+        <div class="winner-phase" id="winner-phase-3" style="display:none;">
+          <div class="winner-crown-el">👑</div>
+          <div class="winner-name-el" id="winner-name-el">—</div>
+          <div class="winner-pts-pill" id="winner-pts-pill">⭐ —</div>
+        </div>
+
+        <!-- لا فائز -->
+        <div class="winner-phase" id="winner-no-winner" style="display:none;">
+          <div class="winner-no-icon">💪</div>
+          <p class="winner-no-text">لا فائز هذه المرّة…<br>كل محاولة خطوة للأمام!</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- شاشة النتائج النهائية (قائمة الشرف) -->
+    <section id="screen-results" class="screen">
+      <!-- canvas الـ confetti (خلفية الشاشة بالكامل) -->
+      <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+
+      <div class="results-wrap">
+
+        <header class="results-header">
+          <h1 class="results-title">🏆 قائمة الشرف 🏆</h1>
+          <p class="results-subtitle" id="results-subtitle">—</p>
+          <p class="results-context" id="results-context">—</p>
+        </header>
+
+        <!-- المنصّة (Podium) -->
+        <div class="podium-section" id="podium-section">
+          <div class="podium-container" id="podium-container">
+            <!-- المنصّات الثلاث تُولَّد ديناميكياً -->
+          </div>
+        </div>
+
+        <!-- قائمة بقية المراكز -->
+        <div class="rest-section" id="rest-section">
+          <div class="rest-divider">
+            <span class="divider-line"></span>
+            <span class="divider-label">بقية المراكز</span>
+            <span class="divider-line"></span>
+          </div>
+          <div class="rest-list" id="rest-list">
+            <!-- البقية تُولَّد ديناميكياً -->
+          </div>
+        </div>
+
+        <!-- أزرار الإجراءات -->
+        <div class="results-actions">
+          <button type="button" class="btn-results btn-results-primary" id="btn-new-quiz">
+            🔄 مسابقة جديدة
+          </button>
+          <button type="button" class="btn-results btn-results-secondary" id="btn-back-to-classes-final">
+            👥 العودة للفصول
+          </button>
+          <button type="button" class="btn-results btn-results-tertiary" id="btn-save-pdf">
+            💾 حفظ النتائج (PDF)
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- toast التعزيز -->
+    <div class="reinforce-toast" id="reinforce-toast" style="display:none;">
+      <div class="rt-emoji" id="rt-emoji">⭐</div>
+      <div class="rt-message" id="rt-message">—</div>
+      <div class="rt-points" id="rt-points" style="display:none;">
+        <span class="rt-points-value" id="rt-points-value">+0</span>
+        <span class="rt-points-label">نقطة</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- مودال مراجعة الأسئلة (خارج #app-container) -->
+  <div class="modal-overlay" id="review-modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 class="modal-title">👁 مراجعة الأسئلة المختارة</h2>
+        <button type="button" class="modal-close-btn" id="btn-close-review-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="rm-questions-list" id="rm-questions-list">
+          <!-- تُولَّد ديناميكياً -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-close-review-modal-footer">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: اختيار الطالب -->
+  <div class="modal-overlay" id="who-modal-overlay" style="display:none;">
+    <div class="modal-box who-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">👤 مَن سيجيب على السؤال؟</h2>
+        <button type="button" class="modal-close-btn" id="who-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="who-modal-hint">اضغطي على اسم الطالب، أو استخدمي قرعة الأسماء لاختيار عشوائي عادل.</p>
+        <button type="button" class="btn-wheel-open" id="btn-open-wheel">
+          🎰 قرعة الأسماء
+        </button>
+        <div class="who-students-grid" id="who-students-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: سلوت ماشين -->
+  <div class="modal-overlay wheel-overlay" id="wheel-modal-overlay" style="display:none;">
+    <div class="modal-box wheel-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">🎰 من سيجيب على السؤال؟</h2>
+        <button type="button" class="modal-close-btn" id="wheel-modal-close" style="visibility:hidden;">✕</button>
+      </div>
+      <div class="modal-body slot-body">
+        <!-- النافذة الزجاجية للسلوت -->
+        <div class="slot-window" id="slot-window">
+          <div class="slot-arrow slot-arrow-right">◀</div>
+          <div class="slot-arrow slot-arrow-left">▶</div>
+          <div class="slot-frame"></div>
+          <div class="slot-strip" id="slot-strip"></div>
+        </div>
+
+        <div class="slot-status" id="slot-status">الأسماء تستدير…</div>
+
+        <div class="slot-result" id="slot-result" style="display:none;">
+          <div class="slot-result-emoji">✨</div>
+          <div class="slot-result-label">تستقرّ على:</div>
+          <div class="slot-result-name" id="slot-result-name">—</div>
+          <div class="slot-result-actions">
+            <button type="button" class="btn-primary slot-confirm-btn" id="btn-slot-confirm">
+              👍 موافق
+            </button>
+            <button type="button" class="slot-absent-btn" id="btn-slot-absent">
+              🚫 الطالب غائب
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: اختصارات لوحة المفاتيح -->
+  <div class="modal-overlay" id="shortcuts-modal-overlay" style="display:none;">
+    <div class="modal-box shortcuts-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">⌨️ اختصارات لوحة المفاتيح</h2>
+        <button type="button" class="modal-close-btn" id="shortcuts-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="shortcuts-intro">استخدمي هذه الاختصارات لتسريع التحكّم في المسابقة، خاصة عند العرض على السبورة الذكية.</p>
+        <table class="shortcuts-table">
+          <thead>
+            <tr><th>المفتاح</th><th>الوظيفة</th><th>السياق</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="sc-keys"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd></td>
+              <td>اختيار الإجابة (أ/ب/ج/د)</td>
+              <td>أثناء السؤال</td>
+            </tr>
+            <tr>
+              <td class="sc-keys"><kbd>Space</kbd></td>
+              <td>من سيجيب؟ (اختيار طالب)</td>
+              <td>السؤال + الجاهزية</td>
+            </tr>
+            <tr>
+              <td class="sc-keys"><kbd>R</kbd></td>
+              <td>قرعة الأسماء (تشغيل مباشر)</td>
+              <td>السؤال + الجاهزية</td>
+            </tr>
+            <tr>
+              <td class="sc-keys"><kbd>Enter</kbd></td>
+              <td>عرض السؤال</td>
+              <td>شاشة "السؤال جاهز"</td>
+            </tr>
+            <tr>
+              <td class="sc-keys"><kbd>S</kbd></td>
+              <td>تخطّي السؤال</td>
+              <td>أثناء السؤال</td>
+            </tr>
+            <tr>
+              <td class="sc-keys"><kbd>+</kbd> <kbd>−</kbd> <kbd>0</kbd></td>
+              <td>تكبير / تصغير / إعادة الخط</td>
+              <td>أي شاشة</td>
+            </tr>
+            <tr>
+              <td class="sc-keys"><kbd>Esc</kbd></td>
+              <td>إغلاق أي نافذة منبثقة</td>
+              <td>أي مكان</td>
+            </tr>
+            <tr>
+              <td class="sc-keys"><kbd>?</kbd></td>
+              <td>إظهار هذه القائمة</td>
+              <td>أي مكان</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="shortcuts-modal-done">تم</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: تحذير إنهاء المسابقة -->
+  <div class="modal-overlay" id="end-quiz-modal-overlay" style="display:none;">
+    <div class="modal-box end-quiz-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">⚠️ إنهاء المسابقة</h2>
+        <button type="button" class="modal-close-btn" id="end-quiz-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="eq-intro" id="eq-intro">—</p>
+
+        <div class="eq-stats">
+          <div class="eq-stat">
+            <span class="eq-stat-icon">✅</span>
+            <span class="eq-stat-label">السؤال الحالي</span>
+            <span class="eq-stat-value" id="eq-current-q">—</span>
+          </div>
+          <div class="eq-stat">
+            <span class="eq-stat-icon">⏳</span>
+            <span class="eq-stat-label">الأسئلة المتبقّية</span>
+            <span class="eq-stat-value" id="eq-remaining-q">—</span>
+          </div>
+          <div class="eq-stat">
+            <span class="eq-stat-icon">👥</span>
+            <span class="eq-stat-label">إجابات الطلاب حتى الآن</span>
+            <span class="eq-stat-value" id="eq-answers-count">—</span>
+          </div>
+        </div>
+
+        <p class="eq-question">ماذا تريدين أن تفعلي؟</p>
+
+        <div class="eq-actions">
+          <button type="button" class="eq-btn eq-btn-finish" id="btn-eq-finish">
+            🏆 إنهاء وعرض قائمة الشرف بالنتائج الحالية
+          </button>
+          <button type="button" class="eq-btn eq-btn-continue" id="btn-eq-continue">
+            ↩️ المتابعة لبقيّة الأسئلة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: استعادة جلسة سابقة -->
+  <div class="modal-overlay" id="restore-modal-overlay" style="display:none;">
+    <div class="modal-box restore-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">🔄 يوجد مسابقة لم تنتهِ</h2>
+      </div>
+      <div class="modal-body">
+        <p class="restore-intro">وجدنا مسابقة سابقة لم تنتهِ. هل تريدين متابعتها من حيث توقّفت؟</p>
+
+        <div class="restore-info">
+          <div class="restore-row">
+            <span class="restore-label">📅 الوقت</span>
+            <span class="restore-value" id="restore-date">—</span>
+          </div>
+          <div class="restore-row">
+            <span class="restore-label">👥 الفصل</span>
+            <span class="restore-value" id="restore-class">—</span>
+          </div>
+          <div class="restore-row">
+            <span class="restore-label">📖 المادة</span>
+            <span class="restore-value" id="restore-subject">—</span>
+          </div>
+          <div class="restore-row">
+            <span class="restore-label">📚 الوحدة</span>
+            <span class="restore-value" id="restore-unit">—</span>
+          </div>
+          <div class="restore-row">
+            <span class="restore-label">❓ التقدّم</span>
+            <span class="restore-value" id="restore-progress">—</span>
+          </div>
+          <div class="restore-row">
+            <span class="restore-label">🏆 أعلى نقاط</span>
+            <span class="restore-value" id="restore-top">—</span>
+          </div>
+        </div>
+
+        <div class="restore-actions">
+          <button type="button" class="restore-btn restore-btn-accept" id="btn-restore-accept">
+            ↩️ متابعة المسابقة
+          </button>
+          <button type="button" class="restore-btn restore-btn-decline" id="btn-restore-decline">
+            🗑️ تجاهل وحذف
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: تأكيد إعادة تعيين بنك الأسئلة -->
+  <div class="modal-overlay" id="reset-bank-modal-overlay" style="display:none;">
+    <div class="modal-box reset-bank-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">⚠️ إعادة تعيين بنك الأسئلة</h2>
+        <button type="button" class="modal-close" id="reset-bank-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="reset-bank-intro">هل أنتِ متأكدة من إعادة تعيين بنك الأسئلة؟</p>
+
+        <div class="reset-bank-info">
+          <div class="reset-bank-section reset-bank-warning">
+            <div class="reset-bank-section-title">
+              <span>⚠️</span> سيتم حذف
+            </div>
+            <ul class="reset-bank-list">
+              <li>جميع الأسئلة من كل المواد</li>
+              <li>الأسئلة التجريبية والمضافة يدوياً معاً</li>
+              <li>أي تعديلات أجريتِها على البنك</li>
+            </ul>
+          </div>
+
+          <div class="reset-bank-section reset-bank-safe">
+            <div class="reset-bank-section-title">
+              <span>✅</span> لن يُحذف
+            </div>
+            <ul class="reset-bank-list">
+              <li>بيانات المعلمة والمدرسة</li>
+              <li>قوائم الطلاب في كل فصل</li>
+              <li>الفصول المختارة</li>
+              <li>تفضيلات الخط والصوت</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="reset-bank-count">
+          <span class="reset-bank-count-label">📊 العدد الحالي:</span>
+          <span class="reset-bank-count-value" id="reset-bank-count-value">—</span>
+          <span class="reset-bank-count-word">سؤال</span>
+        </div>
+
+        <div class="reset-bank-actions">
+          <button type="button" class="reset-bank-btn reset-bank-btn-confirm" id="btn-reset-bank-confirm">
+            🗑️ نعم، احذف الكل
+          </button>
+          <button type="button" class="reset-bank-btn reset-bank-btn-cancel" id="btn-reset-bank-cancel">
+            ↩️ إلغاء
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- المكتبات والسكربتات -->
+  <script src="js/app-config.js"></script>
+  <!-- بيانات الأسئلة المضمّنة (تُولَّد من builder.html) — null = استخدم البنك التجريبي -->
+  <script id="embedded-questions-data" type="application/json">null</script>
+  <script src="libs/anime.min.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/screen-setup.js"></script>
+  <script src="js/screen-classes.js"></script>
+  <script src="js/screen-add-students.js"></script>
+  <script src="js/screen-class-students.js"></script>
+  <script src="js/data-subjects.js"></script>
+  <script src="js/screen-subjects.js"></script>
+  <script src="js/data-units.js"></script>
+  <script src="js/screen-units.js"></script>
+  <script src="js/screen-edit-unit.js"></script>
+  <script src="js/screen-quiz-settings.js"></script>
+  <script src="js/screen-question.js"></script>
+  <script src="js/screen-winner.js"></script>
+  <script src="js/screen-results.js"></script>
+  <script src="js/keyboard-shortcuts.js"></script>
+  <script src="js/session-persistence.js"></script>
+</body>
+</html>
