@@ -1,0 +1,2295 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>بطاقة عيد الأضحى</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page-bg: #f6f7fb;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d9deea;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --danger: #b42318;
+      --shadow: 0 18px 42px rgba(27, 39, 65, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.12), transparent 34%),
+        linear-gradient(315deg, rgba(230, 76, 101, 0.12), transparent 32%),
+        var(--page-bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app-header {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 4px;
+    }
+
+    .app-header h1 {
+      margin: 0 0 6px;
+      font-size: 2rem;
+      line-height: 1.25;
+    }
+
+    .app-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .app-shell {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.9fr) minmax(360px, 1.1fr);
+      gap: 18px;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px;
+      align-items: start;
+    }
+
+    .panel,
+    .preview-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 16px;
+    }
+
+    .panel-title {
+      margin: 0 0 14px;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .form-group label,
+    .templates-label {
+      color: #26334d;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 11px 12px;
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    textarea {
+      min-height: 116px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    .template-option:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
+    }
+
+    .templates {
+      border: 0;
+      padding: 0;
+      margin: 0 0 14px;
+    }
+
+    .template-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .template-option {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      min-height: 90px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+    }
+
+    .template-option:hover {
+      transform: translateY(-1px);
+    }
+
+    .template-option input {
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .template-option:has(input:checked) {
+      border-color: var(--accent);
+      background: #eefaf8;
+    }
+
+    .template-name {
+      font-size: 0.88rem;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .swatch {
+      width: 100%;
+      height: 34px;
+      border-radius: 6px;
+      border: 1px solid rgba(23, 32, 51, 0.12);
+    }
+
+    .swatch.gold {
+      background:
+        radial-gradient(circle at 78% 30%, #f4d27a 0 8%, transparent 9%),
+        linear-gradient(90deg, transparent 0 38%, rgba(241, 196, 92, 0.75) 39% 61%, transparent 62%),
+        linear-gradient(135deg, #07182b, #05372f 68%, #c79a48);
+    }
+
+    .swatch.soft {
+      background:
+        linear-gradient(90deg, rgba(194, 145, 53, 0.65) 0 2px, transparent 2px calc(100% - 2px), rgba(194, 145, 53, 0.65) calc(100% - 2px)),
+        radial-gradient(circle at 24% 34%, rgba(198, 170, 99, 0.2) 0 18%, transparent 19%),
+        linear-gradient(135deg, #fffaf0, #f7f3e9 58%, #ffffff);
+    }
+
+    .swatch.playful {
+      background:
+        radial-gradient(circle at 76% 28%, #ffffff 0 10%, transparent 11%),
+        linear-gradient(135deg, #dff8ef, #53d0b9 54%, #2c5e84);
+    }
+
+    .swatch.luxury-dark {
+      background: url("assets/templates/eid-luxury-dark.png") center 42% / cover;
+    }
+
+    .swatch.cream-gold {
+      background: url("assets/templates/eid-cream-gold.png") center 42% / cover;
+    }
+
+    .swatch.soft-green {
+      background: url("assets/templates/eid-soft-green.png") center 42% / cover;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 44px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 9px 12px;
+      color: #fff;
+      background: var(--accent);
+      font-weight: 800;
+      transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      color: var(--accent-dark);
+      border-color: rgba(15, 118, 110, 0.34);
+      background: #eefaf8;
+    }
+
+    .btn.secondary:hover {
+      background: #dff5f1;
+    }
+
+    .btn.neutral {
+      color: #26334d;
+      border-color: var(--line);
+      background: #f8fafc;
+    }
+
+    .btn.neutral:hover {
+      background: #eef2f7;
+    }
+
+    .status {
+      min-height: 28px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .preview-panel {
+      padding: 14px;
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .preview-title {
+      color: #26334d;
+      font-weight: 800;
+    }
+
+    .preview-frame {
+      width: min(100%, 560px);
+      margin: 0 auto;
+    }
+
+    .eid-card {
+      --card-heading-font: "IBM Plex Sans Arabic", sans-serif;
+      --card-body-font: "IBM Plex Sans Arabic", sans-serif;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      direction: rtl;
+      text-align: center;
+    }
+
+    .eid-card::before,
+    .eid-card::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .card-content {
+      position: absolute;
+      inset: 13% 10% 12%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .card-kicker,
+    .card-label,
+    .card-recipient,
+    .card-greeting,
+    .card-sender {
+      margin: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .card-kicker {
+      font-family: var(--card-heading-font);
+      font-weight: 900;
+      font-size: 2.25rem;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    .card-label {
+      font-family: var(--card-body-font);
+      margin-top: 26px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .card-recipient {
+      font-family: var(--card-heading-font);
+      margin-top: 8px;
+      font-size: var(--recipient-size, 2.5rem);
+      font-weight: 900;
+      line-height: 1.42;
+      letter-spacing: 0;
+      min-width: min(82%, 430px);
+      padding: 16px 28px 18px;
+      border-radius: 999px;
+      box-shadow: 0 14px 30px rgba(11, 24, 43, 0.16);
+    }
+
+    .card-greeting {
+      font-family: var(--card-body-font);
+      margin-top: 26px;
+      font-size: var(--greeting-size, 1.28rem);
+      font-weight: 400;
+      line-height: 1.9;
+      letter-spacing: 0;
+    }
+
+    .card-sender {
+      font-family: var(--card-body-font);
+      margin-top: 24px;
+      font-size: var(--sender-size, 1.08rem);
+      font-weight: 400;
+      letter-spacing: 0;
+      white-space: pre-line;
+    }
+
+    .card-sender[hidden] {
+      display: none;
+    }
+
+    .ornament {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .kaaba-mark,
+    .arch-mark,
+    .geo-pattern,
+    .sheep-mark,
+    .lantern,
+    .corner-ornaments {
+      display: none;
+    }
+
+    .lantern {
+      width: 62px;
+      color: currentColor;
+      opacity: 0.82;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+    }
+
+    .kaaba-mark {
+      width: 86px;
+      height: 76px;
+      border-radius: 4px 4px 2px 2px;
+      background:
+        linear-gradient(90deg, transparent 0 36%, currentColor 37% 63%, transparent 64%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 28%),
+        #0c1320;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+    }
+
+    .kaaba-mark::before {
+      content: "";
+      position: absolute;
+      top: 18%;
+      right: 0;
+      left: 0;
+      height: 10px;
+      background: currentColor;
+      opacity: 0.86;
+    }
+
+    .arch-mark {
+      width: 210px;
+      height: 260px;
+      border: 3px solid currentColor;
+      border-bottom: 0;
+      border-radius: 105px 105px 14px 14px;
+      opacity: 0.2;
+    }
+
+    .geo-pattern {
+      width: 150px;
+      height: 150px;
+      opacity: 0.18;
+      background:
+        linear-gradient(45deg, transparent 47%, currentColor 48% 52%, transparent 53%),
+        linear-gradient(-45deg, transparent 47%, currentColor 48% 52%, transparent 53%);
+      background-size: 32px 32px;
+      border-radius: 12px;
+    }
+
+    .corner-ornaments {
+      display: none;
+      inset: 6%;
+      width: 88%;
+      height: 88%;
+      color: currentColor;
+      opacity: 0.44;
+    }
+
+    .gold-luxury {
+      --card-heading-font: "IBM Plex Sans Arabic", sans-serif;
+      --card-body-font: "IBM Plex Sans Arabic", sans-serif;
+      color: #fff7dd;
+      background:
+        radial-gradient(circle at 50% 44%, rgba(246, 207, 118, 0.2), transparent 32%),
+        radial-gradient(circle at 12% 12%, rgba(255, 255, 255, 0.08), transparent 18%),
+        linear-gradient(45deg, rgba(246, 207, 118, 0.035) 25%, transparent 25% 75%, rgba(246, 207, 118, 0.035) 75%),
+        linear-gradient(135deg, #06182b, #082d2e 52%, #063a2f);
+      background-size: auto, auto, 36px 36px, auto;
+      border: 1px solid rgba(217, 171, 83, 0.72);
+    }
+
+    .gold-luxury::before {
+      inset: 6%;
+      border: 2px solid rgba(245, 196, 91, 0.68);
+      border-radius: 24px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 246, 205, 0.14),
+        0 0 34px rgba(246, 207, 118, 0.08);
+    }
+
+    .gold-luxury::after {
+      width: 39%;
+      height: 56%;
+      left: 50%;
+      top: 17%;
+      transform: translateX(-50%);
+      border: 3px solid rgba(245, 196, 91, 0.22);
+      border-bottom: 0;
+      border-radius: 999px 999px 20px 20px;
+    }
+
+    .gold-luxury .card-kicker,
+    .gold-luxury .card-recipient {
+      color: #f6cf76;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.34);
+    }
+
+    .gold-luxury .card-kicker {
+      line-height: 1.36;
+      margin-bottom: 6px;
+      font-size: 2.1rem;
+    }
+
+    .gold-luxury .card-recipient {
+      line-height: 1.5;
+      text-shadow: 0 3px 16px rgba(0, 0, 0, 0.36);
+      color: #06182b;
+      background:
+        radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.34), transparent 36%),
+        linear-gradient(180deg, #f3d794, #c99d47);
+      border: 2px solid rgba(255, 239, 183, 0.78);
+      box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.28),
+        inset 0 0 0 1px rgba(123, 83, 25, 0.22);
+    }
+
+    .gold-luxury .card-greeting {
+      line-height: 2.05;
+      font-weight: 400;
+    }
+
+    .gold-luxury .card-label,
+    .gold-luxury .card-greeting,
+    .gold-luxury .card-sender {
+      color: #fff7dd;
+    }
+
+    .gold-luxury .moon {
+      top: 9%;
+      left: 10%;
+      width: 70px;
+      color: #f6cf76;
+      opacity: 0.9;
+    }
+
+    .gold-luxury .sparkles {
+      right: 10%;
+      top: 10%;
+      width: 92px;
+      color: #f6cf76;
+      opacity: 0.65;
+    }
+
+    .gold-luxury .kaaba-mark {
+      display: block;
+      right: 10%;
+      bottom: 11%;
+      color: #d9b55c;
+      opacity: 0.82;
+      transform: rotate(-1deg) scale(0.92);
+    }
+
+    .gold-luxury .geo-pattern {
+      display: block;
+      left: 8%;
+      bottom: 9%;
+      color: #f6cf76;
+      opacity: 0.12;
+    }
+
+    .gold-luxury .corner-ornaments {
+      display: block;
+      color: #f6cf76;
+      opacity: 0.5;
+    }
+
+    .gold-luxury .lantern {
+      display: block;
+      color: #f6cf76;
+    }
+
+    .gold-luxury .lantern-left {
+      left: 9%;
+      top: 27%;
+    }
+
+    .gold-luxury .lantern-right {
+      right: 9%;
+      top: 27%;
+    }
+
+    .soft-light {
+      --card-heading-font: "IBM Plex Sans Arabic", sans-serif;
+      --card-body-font: "IBM Plex Sans Arabic", sans-serif;
+      color: #243044;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(210, 177, 102, 0.22), transparent 20%),
+        radial-gradient(circle at 86% 84%, rgba(132, 165, 122, 0.18), transparent 26%),
+        linear-gradient(45deg, rgba(191, 146, 62, 0.035) 25%, transparent 25% 75%, rgba(191, 146, 62, 0.035) 75%),
+        linear-gradient(145deg, #fffaf0, #fbf7ec 50%, #ffffff);
+      background-size: auto, auto, 42px 42px, auto;
+      border: 1px solid rgba(190, 151, 74, 0.32);
+    }
+
+    .soft-light::before {
+      inset: 6%;
+      border: 2px solid rgba(191, 146, 62, 0.46);
+      border-radius: 22px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .soft-light::after {
+      width: 34%;
+      height: 48%;
+      right: 8%;
+      bottom: 10%;
+      border: 2px solid rgba(15, 118, 110, 0.1);
+      border-bottom: 0;
+      border-radius: 999px 999px 12px 12px;
+    }
+
+    .soft-light .card-kicker,
+    .soft-light .card-recipient {
+      color: #0b6c60;
+      font-weight: 800;
+    }
+
+    .soft-light .card-recipient {
+      color: #6f5425;
+      background:
+        radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.9), transparent 42%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), #fff7e8);
+      border: 2px solid rgba(194, 145, 53, 0.52);
+      box-shadow:
+        0 14px 24px rgba(152, 112, 43, 0.14),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .soft-light .card-label {
+      color: #9a7430;
+    }
+
+    .soft-light .card-greeting,
+    .soft-light .card-sender {
+      font-weight: 400;
+    }
+
+    .soft-light .moon {
+      top: 9%;
+      right: 10%;
+      width: 64px;
+      color: #c29135;
+      opacity: 0.55;
+    }
+
+    .soft-light .sparkles {
+      left: 10%;
+      top: 10%;
+      width: 92px;
+      color: #c29135;
+      opacity: 0.32;
+    }
+
+    .soft-light .kaaba-mark {
+      display: none;
+    }
+
+    .soft-light .arch-mark {
+      display: block;
+      right: 11%;
+      bottom: 10%;
+      color: #0b6c60;
+      opacity: 0.11;
+    }
+
+    .soft-light .geo-pattern {
+      display: block;
+      left: 9%;
+      bottom: 9%;
+      color: #c29135;
+      opacity: 0.13;
+    }
+
+    .soft-light .corner-ornaments {
+      display: block;
+      color: #c29135;
+      opacity: 0.34;
+    }
+
+    .soft-light .lantern {
+      display: block;
+      color: #c29135;
+      opacity: 0.68;
+    }
+
+    .soft-light .lantern-left {
+      left: 10%;
+      top: 28%;
+    }
+
+    .soft-light .lantern-right {
+      right: 10%;
+      top: 28%;
+    }
+
+    .playful-bright {
+      --card-heading-font: "IBM Plex Sans Arabic", sans-serif;
+      --card-body-font: "IBM Plex Sans Arabic", sans-serif;
+      color: #172033;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.72), transparent 17%),
+        radial-gradient(circle at 82% 24%, rgba(242, 198, 112, 0.32), transparent 18%),
+        linear-gradient(45deg, rgba(255, 255, 255, 0.12) 25%, transparent 25% 75%, rgba(255, 255, 255, 0.12) 75%),
+        linear-gradient(135deg, #dff8ef, #55cbb9 52%, #2c5e84);
+      background-size: auto, auto, 38px 38px, auto;
+      border: 1px solid rgba(23, 32, 51, 0.14);
+    }
+
+    .playful-bright::before {
+      inset: 8%;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.54);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.54);
+    }
+
+    .playful-bright::after {
+      inset: 6%;
+      border: 3px solid rgba(15, 53, 87, 0.16);
+      border-radius: 24px;
+    }
+
+    .playful-bright .card-kicker,
+    .playful-bright .card-recipient {
+      color: #0f3557;
+      text-shadow: 0 3px 16px rgba(255, 255, 255, 0.52);
+    }
+
+    .playful-bright .card-recipient {
+      color: #0f4f57;
+      background:
+        radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.88), transparent 42%),
+        linear-gradient(180deg, #d9f3e9, #b9dfd1);
+      border: 2px solid rgba(194, 145, 53, 0.42);
+      box-shadow: 0 14px 24px rgba(15, 53, 87, 0.14);
+      text-shadow: none;
+    }
+
+    .playful-bright .card-kicker {
+      font-weight: 900;
+    }
+
+    .playful-bright .card-label {
+      color: #6f5f1f;
+    }
+
+    .playful-bright .card-greeting,
+    .playful-bright .card-sender {
+      color: #1e293b;
+    }
+
+    .playful-bright .moon {
+      left: 9%;
+      top: 9%;
+      width: 68px;
+      color: #fff;
+      opacity: 0.82;
+    }
+
+    .playful-bright .sparkles {
+      right: 7%;
+      bottom: 8%;
+      width: 116px;
+      color: #fff;
+      opacity: 0.72;
+    }
+
+    .playful-bright .geo-pattern {
+      display: block;
+      left: 7%;
+      bottom: 7%;
+      color: #0f3557;
+      opacity: 0.14;
+    }
+
+    .playful-bright .sheep-mark {
+      display: block;
+      right: 9%;
+      bottom: 11%;
+      width: 74px;
+      color: #ffffff;
+      opacity: 0.76;
+      filter: drop-shadow(0 4px 10px rgba(15, 53, 87, 0.18));
+    }
+
+    .playful-bright .corner-ornaments {
+      display: block;
+      color: #0f3557;
+      opacity: 0.2;
+    }
+
+    .playful-bright .lantern {
+      display: block;
+      color: #b98a35;
+      opacity: 0.58;
+    }
+
+    .playful-bright .lantern-left {
+      left: 13%;
+      top: 16%;
+      width: 48px;
+    }
+
+    .playful-bright .lantern-right {
+      right: 12%;
+      top: 12%;
+      width: 54px;
+    }
+
+    @media (max-width: 900px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-panel {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .app-header {
+        padding-top: 18px;
+      }
+
+      .app-header h1 {
+        font-size: 1.55rem;
+      }
+
+      .app-shell {
+        padding: 12px;
+      }
+
+      .template-list,
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-panel,
+      .panel {
+        box-shadow: 0 10px 24px rgba(27, 39, 65, 0.1);
+      }
+
+      .card-content {
+        inset: 8%;
+      }
+
+      .card-kicker {
+        font-size: 1.55rem;
+      }
+
+      .card-label {
+        margin-top: 18px;
+        font-size: 0.92rem;
+      }
+
+      .card-recipient {
+        font-size: calc(var(--recipient-size, 2.1rem) * 0.82);
+      }
+
+      .card-greeting {
+        margin-top: 14px;
+        font-size: calc(var(--greeting-size, 1.08rem) * 0.9);
+      }
+
+      .card-sender {
+        margin-top: 18px;
+      }
+
+      .moon {
+        transform: scale(0.82);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card-content {
+        inset: 9% 10% 12%;
+      }
+
+      .card-kicker,
+      .gold-luxury .card-kicker,
+      .soft-light .card-kicker,
+      .playful-bright .card-kicker {
+        font-size: 0.92rem;
+        line-height: 1.34;
+      }
+
+      .card-label {
+        margin-top: 7px;
+        font-size: 0.58rem;
+      }
+
+      .card-recipient,
+      .gold-luxury .card-recipient,
+      .soft-light .card-recipient,
+      .playful-bright .card-recipient {
+        margin-top: 3px;
+        min-width: 74%;
+        padding: 8px 16px 10px;
+        font-size: calc(var(--recipient-size, 2.1rem) * 0.39);
+        line-height: 1.34;
+      }
+
+      .card-greeting {
+        margin-top: 7px;
+        font-size: calc(var(--greeting-size, 1.08rem) * 0.5);
+        line-height: 1.55;
+      }
+
+      .card-sender {
+        margin-top: 6px;
+        font-size: calc(var(--sender-size, 1rem) * 0.5);
+        line-height: 1.45;
+      }
+
+      .kaaba-mark {
+        width: 56px;
+        height: 50px;
+      }
+
+      .arch-mark {
+        transform: scale(0.7);
+        transform-origin: bottom center;
+      }
+
+      .geo-pattern {
+        width: 92px;
+        height: 92px;
+        background-size: 24px 24px;
+      }
+
+      .gold-luxury .kaaba-mark {
+        right: 8%;
+        bottom: 7%;
+        opacity: 0.7;
+      }
+
+      .gold-luxury .geo-pattern {
+        left: 6%;
+        bottom: 6%;
+        opacity: 0.11;
+      }
+
+      .soft-light .kaaba-mark {
+        left: 8%;
+        top: 10%;
+      }
+
+      .playful-bright .sheep-mark {
+        width: 48px;
+        right: 8%;
+        bottom: 8%;
+        opacity: 0.72;
+      }
+
+      .playful-bright .geo-pattern {
+        left: 5%;
+        bottom: 5%;
+        opacity: 0.12;
+      }
+
+      .lantern {
+        width: 38px;
+      }
+
+      .gold-luxury .lantern-left,
+      .soft-light .lantern-left {
+        left: 8%;
+      }
+
+      .gold-luxury .lantern-right,
+      .soft-light .lantern-right {
+        right: 8%;
+      }
+    }
+
+    .preview-frame {
+      width: min(100%, 460px);
+    }
+
+    .eid-card {
+      --template-width: 1060;
+      --template-height: 1484;
+      --template-image: url("assets/templates/eid-luxury-dark.png");
+      --card-heading-font: "IBM Plex Sans Arabic", sans-serif;
+      --card-body-font: "IBM Plex Sans Arabic", sans-serif;
+      --recipient-top: 54.7%;
+      --recipient-width: 68%;
+      --recipient-height: 13%;
+      --greeting-top: 75.8%;
+      --greeting-width: 70%;
+      --greeting-height: 16%;
+      --sender-top: 93.1%;
+      --sender-width: 42%;
+      --sender-height: 4.8%;
+      --recipient-color: #06182b;
+      --body-color: #3f2b16;
+      --sender-color: #06182b;
+      aspect-ratio: var(--template-width) / var(--template-height);
+      background-image: var(--template-image);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border: 0;
+      box-shadow: 0 16px 34px rgba(17, 24, 39, 0.16);
+    }
+
+    .eid-card::before,
+    .eid-card::after,
+    .eid-card .ornament,
+    .card-kicker,
+    .card-label {
+      display: none !important;
+    }
+
+    .eid-luxury-dark {
+      --template-width: 1060;
+      --template-height: 1484;
+      --template-image: url("assets/templates/eid-luxury-dark.png");
+      --recipient-top: 54.7%;
+      --recipient-width: 68%;
+      --recipient-height: 13%;
+      --greeting-top: 75.8%;
+      --greeting-width: 70%;
+      --greeting-height: 16%;
+      --sender-top: 93.1%;
+      --sender-width: 42%;
+      --sender-height: 4.8%;
+      --recipient-color: #06182b;
+      --body-color: #3f2b16;
+      --sender-color: #06182b;
+    }
+
+    .eid-cream-gold {
+      --template-width: 1054;
+      --template-height: 1492;
+      --template-image: url("assets/templates/eid-cream-gold.png");
+      --recipient-top: 48.2%;
+      --recipient-width: 62%;
+      --recipient-height: 12%;
+      --greeting-top: 72.8%;
+      --greeting-width: 77%;
+      --greeting-height: 19%;
+      --sender-top: 93.4%;
+      --sender-width: 42%;
+      --sender-height: 5%;
+      --recipient-color: #6b481b;
+      --body-color: #574029;
+      --sender-color: #574029;
+    }
+
+    .eid-soft-green {
+      --template-width: 1075;
+      --template-height: 1463;
+      --template-image: url("assets/templates/eid-soft-green.png");
+      --recipient-top: 45.4%;
+      --recipient-width: 68%;
+      --recipient-height: 13%;
+      --greeting-top: 70%;
+      --greeting-width: 70%;
+      --greeting-height: 19%;
+      --sender-top: 91.3%;
+      --sender-width: 38%;
+      --sender-height: 5.2%;
+      --recipient-color: #194838;
+      --body-color: #365542;
+      --sender-color: #194838;
+    }
+
+    .card-content {
+      position: absolute;
+      inset: 0;
+      display: block;
+      min-width: 0;
+    }
+
+    .card-recipient,
+    .card-greeting,
+    .card-sender {
+      position: absolute;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      min-width: 0;
+      max-width: none;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      letter-spacing: 0;
+      text-align: center;
+      overflow-wrap: anywhere;
+      white-space: normal;
+      transform: translate(-50%, -50%);
+    }
+
+    .card-recipient {
+      top: var(--recipient-top);
+      width: var(--recipient-width);
+      height: var(--recipient-height);
+      color: var(--recipient-color);
+      font-family: var(--card-heading-font);
+      font-size: var(--recipient-size, 2.2rem);
+      font-weight: 700;
+      line-height: 1.35;
+      padding: 0.12em 0.9em;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
+    }
+
+    .card-greeting {
+      top: var(--greeting-top);
+      width: var(--greeting-width);
+      height: var(--greeting-height);
+      color: var(--body-color);
+      font-family: var(--card-body-font);
+      font-size: var(--greeting-size, 1.12rem);
+      font-weight: 400;
+      line-height: 1.75;
+      overflow: hidden;
+      padding: 0.25em 1em;
+      max-height: calc(var(--greeting-size, 1.12rem) * 1.75 * 3);
+    }
+
+    .card-sender {
+      top: var(--sender-top);
+      width: var(--sender-width);
+      height: var(--sender-height);
+      color: var(--sender-color);
+      font-family: var(--card-body-font);
+      font-size: var(--sender-size, 1rem);
+      font-weight: 400;
+      line-height: 1.4;
+      padding: 0.08em 0.75em;
+    }
+
+    .card-sender[hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 480px) {
+      .preview-frame {
+        width: min(100%, 360px);
+      }
+
+      .card-recipient {
+        font-size: calc(var(--recipient-size, 2rem) * 0.76);
+      }
+
+      .card-greeting {
+        font-size: calc(var(--greeting-size, 1.05rem) * 0.82);
+        line-height: 1.6;
+      }
+
+      .card-sender {
+        font-size: calc(var(--sender-size, 0.96rem) * 0.82);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <h1>بطاقة عيد الأضحى</h1>
+    <p>اختر تصميمًا بروح الحج والأضحى، اكتب الاسم، وحمّل بطاقتك الجاهزة للمشاركة.</p>
+  </header>
+
+  <main class="app-shell">
+    <section class="panel" aria-labelledby="editor-title">
+      <h2 class="panel-title" id="editor-title">صمّم تهنئة عيد الأضحى باسمك خلال ثواني</h2>
+
+      <fieldset class="templates">
+        <legend class="templates-label">اختر القالب</legend>
+        <div class="template-list">
+          <label class="template-option">
+            <input type="radio" name="template" value="eid-luxury-dark" checked>
+            <span class="swatch luxury-dark" aria-hidden="true"></span>
+            <span class="template-name">فاخر داكن</span>
+          </label>
+          <label class="template-option">
+            <input type="radio" name="template" value="eid-cream-gold">
+            <span class="swatch cream-gold" aria-hidden="true"></span>
+            <span class="template-name">عاجي ذهبي</span>
+          </label>
+          <label class="template-option">
+            <input type="radio" name="template" value="eid-soft-green">
+            <span class="swatch soft-green" aria-hidden="true"></span>
+            <span class="template-name">ناعم أخضر</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <label for="recipientName">اسم المهدى إليه</label>
+        <input id="recipientName" type="text" maxlength="40" value="والدي الغالي محمد" placeholder="والدي الغالي محمد" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label for="greetingText">عبارة التهنئة</label>
+        <textarea id="greetingText" maxlength="120">كل عام وأنت بخير، تقبّل الله طاعتك، وأدام عليك الصحة والرضا.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="senderName">اسم المرسل</label>
+        <input id="senderName" type="text" maxlength="40" value="ابنك المحب" placeholder="ابنك المحب" autocomplete="off">
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" id="downloadBtn">تحميل PNG</button>
+        <button class="btn secondary" type="button" id="shareBtn">مشاركة</button>
+        <button class="btn neutral" type="button" id="copyBtn">نسخ النص</button>
+      </div>
+
+      <p class="status" id="statusMessage" aria-live="polite"></p>
+    </section>
+
+    <section class="preview-panel" aria-labelledby="preview-title">
+      <div class="preview-top">
+        <span class="preview-title" id="preview-title">معاينة البطاقة</span>
+        <span id="previewSize">1060 × 1484</span>
+      </div>
+
+      <div class="preview-frame">
+        <article class="eid-card eid-luxury-dark" id="cardPreview" aria-label="معاينة بطاقة عيد">
+          <div class="card-content">
+            <h2 class="card-recipient" id="previewRecipient">والدي الغالي محمد</h2>
+            <p class="card-greeting" id="previewGreeting">كل عام وأنت بخير، تقبّل الله طاعتك، وأدام عليك الصحة والرضا.</p>
+            <p class="card-sender" id="previewSender">ابنك المحب</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/templates/template-image-data.js"></script>
+  <script>
+    const TEMPLATE_TEXT_DEFAULTS = {
+      "eid-luxury-dark": {
+        recipientName: "والدي الغالي محمد",
+        greetingText: "كل عام وأنت بخير، تقبّل الله طاعتك، وأدام عليك الصحة والرضا.",
+        senderName: "ابنك المحب"
+      },
+      "eid-cream-gold": {
+        recipientName: "أمي الحبيبة نورة",
+        greetingText: "عيد أضحى مبارك يا أغلى الناس، جعل الله أيامك سعادة وطمأنينة.",
+        senderName: "ابنتك المحبة"
+      },
+      "eid-soft-green": {
+        recipientName: "أختي الغالية سارة",
+        greetingText: "كل عام وأنتِ بخير، عيدك فرح وقلبك عامر بالسعادة.",
+        senderName: "أخوك المحب"
+      }
+    };
+
+    const DEFAULTS = {
+      ...TEMPLATE_TEXT_DEFAULTS["eid-luxury-dark"],
+      templateId: "eid-luxury-dark"
+    };
+
+    const TEMPLATE_CONFIG = {
+      "eid-luxury-dark": {
+        name: "فاخر داكن",
+        image: "assets/templates/eid-luxury-dark.png",
+        width: 1060,
+        height: 1484,
+        fonts: {
+          heading: "\"IBM Plex Sans Arabic\", sans-serif",
+          body: "\"IBM Plex Sans Arabic\", sans-serif"
+        },
+        colors: {
+          recipient: "#06182b",
+          greeting: "#3f2b16",
+          sender: "#06182b"
+        },
+        boxes: {
+          recipient: { x: 0.5, y: 0.552, width: 0.62, height: 0.12, maxLines: 2, size: 58, minSize: 36, weight: 700, lineHeight: 1.3, paddingX: 0.04, paddingY: 0.08 },
+          greeting: { x: 0.5, y: 0.758, width: 0.66, height: 0.15, maxLines: 3, size: 32, minSize: 22, weight: 400, lineHeight: 1.64, paddingX: 0.04, paddingY: 0.1 },
+          sender: { x: 0.5, y: 0.932, width: 0.36, height: 0.044, maxLines: 1, size: 27, minSize: 18, weight: 400, lineHeight: 1.3, paddingX: 0.04, paddingY: 0.08 }
+        }
+      },
+      "eid-cream-gold": {
+        name: "عاجي ذهبي",
+        image: "assets/templates/eid-cream-gold.png",
+        width: 1054,
+        height: 1492,
+        fonts: {
+          heading: "\"IBM Plex Sans Arabic\", sans-serif",
+          body: "\"IBM Plex Sans Arabic\", sans-serif"
+        },
+        colors: {
+          recipient: "#6b481b",
+          greeting: "#574029",
+          sender: "#574029"
+        },
+        boxes: {
+          recipient: { x: 0.5, y: 0.482, width: 0.58, height: 0.11, maxLines: 2, size: 56, minSize: 36, weight: 700, lineHeight: 1.32, paddingX: 0.04, paddingY: 0.08 },
+          greeting: { x: 0.5, y: 0.728, width: 0.7, height: 0.17, maxLines: 3, size: 32, minSize: 22, weight: 400, lineHeight: 1.64, paddingX: 0.04, paddingY: 0.1 },
+          sender: { x: 0.5, y: 0.934, width: 0.36, height: 0.046, maxLines: 1, size: 27, minSize: 18, weight: 400, lineHeight: 1.3, paddingX: 0.04, paddingY: 0.08 }
+        }
+      },
+      "eid-soft-green": {
+        name: "ناعم أخضر",
+        image: "assets/templates/eid-soft-green.png",
+        width: 1075,
+        height: 1463,
+        fonts: {
+          heading: "\"IBM Plex Sans Arabic\", sans-serif",
+          body: "\"IBM Plex Sans Arabic\", sans-serif"
+        },
+        colors: {
+          recipient: "#194838",
+          greeting: "#365542",
+          sender: "#194838"
+        },
+        boxes: {
+          recipient: { x: 0.5, y: 0.454, width: 0.62, height: 0.12, maxLines: 2, size: 56, minSize: 36, weight: 700, lineHeight: 1.32, paddingX: 0.04, paddingY: 0.08 },
+          greeting: { x: 0.5, y: 0.7, width: 0.64, height: 0.17, maxLines: 3, size: 31, minSize: 22, weight: 400, lineHeight: 1.64, paddingX: 0.04, paddingY: 0.1 },
+          sender: { x: 0.5, y: 0.913, width: 0.32, height: 0.048, maxLines: 1, size: 26, minSize: 18, weight: 400, lineHeight: 1.3, paddingX: 0.04, paddingY: 0.08 }
+        }
+      }
+    };
+
+    const TEMPLATE_NAMES = Object.fromEntries(
+      Object.entries(TEMPLATE_CONFIG).map(([id, config]) => [id, config.name])
+    );
+
+    const TEMPLATE_FONTS = Object.fromEntries(
+      Object.entries(TEMPLATE_CONFIG).map(([id, config]) => [id, config.fonts])
+    );
+
+    const elements = {
+      recipient: document.getElementById("recipientName"),
+      greeting: document.getElementById("greetingText"),
+      sender: document.getElementById("senderName"),
+      preview: document.getElementById("cardPreview"),
+      previewRecipient: document.getElementById("previewRecipient"),
+      previewGreeting: document.getElementById("previewGreeting"),
+      previewSender: document.getElementById("previewSender"),
+      previewSize: document.getElementById("previewSize"),
+      status: document.getElementById("statusMessage"),
+      download: document.getElementById("downloadBtn"),
+      share: document.getElementById("shareBtn"),
+      copy: document.getElementById("copyBtn")
+    };
+
+    let hasUserEditedText = false;
+
+    function getTemplateTextDefaults(templateId) {
+      return TEMPLATE_TEXT_DEFAULTS[templateId] || TEMPLATE_TEXT_DEFAULTS[DEFAULTS.templateId];
+    }
+
+    function setInputPlaceholders(templateId) {
+      const defaults = getTemplateTextDefaults(templateId);
+      elements.recipient.placeholder = defaults.recipientName;
+      elements.greeting.placeholder = defaults.greetingText;
+      elements.sender.placeholder = defaults.senderName;
+    }
+
+    function applyTemplateTextDefaults(templateId) {
+      const defaults = getTemplateTextDefaults(templateId);
+      elements.recipient.value = defaults.recipientName;
+      elements.greeting.value = defaults.greetingText;
+      elements.sender.value = defaults.senderName;
+      setInputPlaceholders(templateId);
+    }
+
+    function cleanText(value, fallback) {
+      const text = value.replace(/\s+/g, " ").trim();
+      return text || fallback;
+    }
+
+    function getState() {
+      const selectedTemplate = document.querySelector("input[name='template']:checked");
+      const templateId = selectedTemplate && TEMPLATE_CONFIG[selectedTemplate.value] ? selectedTemplate.value : DEFAULTS.templateId;
+      const defaults = getTemplateTextDefaults(templateId);
+      return {
+        recipientName: cleanText(elements.recipient.value, defaults.recipientName),
+        greetingText: cleanText(elements.greeting.value, defaults.greetingText),
+        senderName: elements.sender.value.replace(/\s+/g, " ").trim(),
+        templateId
+      };
+    }
+
+    function setStatus(message, isError = false) {
+      elements.status.textContent = message;
+      elements.status.classList.toggle("error", isError);
+    }
+
+    function updateTextSizing(state) {
+      const recipientSize = state.recipientName.length > 32 ? "1.42rem" : state.recipientName.length > 24 ? "1.62rem" : "2.06rem";
+      const greetingSize = state.greetingText.length > 96 ? "0.86rem" : state.greetingText.length > 72 ? "0.96rem" : "1.06rem";
+      const senderSize = state.senderName.length > 30 ? "0.82rem" : "0.98rem";
+
+      elements.preview.style.setProperty("--recipient-size", recipientSize);
+      elements.preview.style.setProperty("--greeting-size", greetingSize);
+      elements.preview.style.setProperty("--sender-size", senderSize);
+    }
+
+    function fitPreviewTextElement(element, cssVariable, minRem) {
+      if (!element || element.hidden) {
+        return;
+      }
+
+      let currentRem = Number.parseFloat(getComputedStyle(element).fontSize) / 16;
+      for (let attempt = 0; attempt < 18; attempt += 1) {
+        const hasOverflow = element.scrollWidth > element.clientWidth + 1 || element.scrollHeight > element.clientHeight + 1;
+        if (!hasOverflow || currentRem <= minRem) {
+          break;
+        }
+
+        currentRem -= 0.06;
+        elements.preview.style.setProperty(cssVariable, `${currentRem.toFixed(2)}rem`);
+      }
+    }
+
+    function fitPreviewTextBoxes() {
+      fitPreviewTextElement(elements.previewRecipient, "--recipient-size", 1.05);
+      fitPreviewTextElement(elements.previewGreeting, "--greeting-size", 0.68);
+      fitPreviewTextElement(elements.previewSender, "--sender-size", 0.68);
+    }
+
+    function updatePreview() {
+      const state = getState();
+
+      elements.preview.className = `eid-card ${state.templateId}`;
+      elements.previewRecipient.textContent = state.recipientName;
+      elements.previewGreeting.textContent = state.greetingText;
+      elements.previewSender.hidden = !state.senderName;
+      elements.previewSender.textContent = state.senderName;
+      elements.previewSize.textContent = `${TEMPLATE_CONFIG[state.templateId].width} × ${TEMPLATE_CONFIG[state.templateId].height}`;
+      updateTextSizing(state);
+      requestAnimationFrame(fitPreviewTextBoxes);
+    }
+
+    function buildShareText(state) {
+      return `أضحى مبارك يا ${state.recipientName} 🌙\n${state.greetingText}`;
+    }
+
+    function drawRoundedRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function drawStar(ctx, x, y, outerRadius, innerRadius, points, color) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.translate(x, y);
+      ctx.moveTo(0, -outerRadius);
+      for (let i = 0; i < points * 2; i += 1) {
+        const radius = i % 2 === 0 ? innerRadius : outerRadius;
+        const angle = (Math.PI / points) * i - Math.PI / 2;
+        ctx.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
+      }
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawCrescent(ctx, x, y, radius, color, cutColor, shift = 22) {
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = cutColor;
+      ctx.beginPath();
+      ctx.arc(x + shift, y - 4, radius * 0.95, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawKaaba(ctx, x, y, width, height, goldColor, alpha = 1) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = "#0b111d";
+      drawRoundedRect(ctx, x, y, width, height, 8);
+      ctx.fill();
+
+      ctx.fillStyle = goldColor;
+      ctx.fillRect(x, y + height * 0.2, width, height * 0.11);
+      ctx.fillRect(x + width * 0.42, y, width * 0.16, height);
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.09)";
+      ctx.fillRect(x + width * 0.08, y + height * 0.38, width * 0.84, height * 0.04);
+      ctx.restore();
+    }
+
+    function drawArch(ctx, x, y, width, height, color, alpha = 0.22) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(x, y + height);
+      ctx.lineTo(x, y + width / 2);
+      ctx.quadraticCurveTo(x, y, x + width / 2, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + width / 2);
+      ctx.lineTo(x + width, y + height);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawGeometricPattern(ctx, x, y, size, color, alpha = 0.18) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+
+      for (let offset = 0; offset <= size; offset += 36) {
+        ctx.beginPath();
+        ctx.moveTo(x + offset, y);
+        ctx.lineTo(x, y + offset);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(x + size - offset, y);
+        ctx.lineTo(x + size, y + offset);
+        ctx.stroke();
+      }
+
+      ctx.strokeRect(x, y, size, size);
+      ctx.restore();
+    }
+
+    function drawCornerOrnaments(ctx, color, alpha = 0.38) {
+      const corners = [
+        [78, 78, 1, 1],
+        [1002, 78, -1, 1],
+        [1002, 1002, -1, -1],
+        [78, 1002, 1, -1]
+      ];
+
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineCap = "round";
+      ctx.globalAlpha = alpha;
+
+      corners.forEach(([x, y, sx, sy]) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(sx, sy);
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.moveTo(0, 92);
+        ctx.lineTo(0, 0);
+        ctx.lineTo(92, 0);
+        ctx.stroke();
+
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(28, 64);
+        ctx.lineTo(72, 64);
+        ctx.lineTo(72, 26);
+        ctx.moveTo(24, 24);
+        ctx.lineTo(64, 64);
+        ctx.stroke();
+        ctx.restore();
+      });
+
+      ctx.restore();
+    }
+
+    function drawTextPlate(ctx, templateId) {
+      ctx.save();
+      if (templateId === "gold-luxury") {
+        ctx.fillStyle = "rgba(3, 22, 30, 0.18)";
+        drawRoundedRect(ctx, 168, 280, 744, 520, 34);
+        ctx.fill();
+        ctx.strokeStyle = "rgba(246, 207, 118, 0.12)";
+        ctx.lineWidth = 2;
+        drawRoundedRect(ctx, 190, 302, 700, 476, 28);
+        ctx.stroke();
+      } else if (templateId === "soft-light") {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.56)";
+        drawRoundedRect(ctx, 168, 284, 744, 520, 30);
+        ctx.fill();
+        ctx.strokeStyle = "rgba(194, 145, 53, 0.18)";
+        ctx.lineWidth = 2;
+        drawRoundedRect(ctx, 190, 306, 700, 476, 26);
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.52)";
+        drawRoundedRect(ctx, 150, 282, 780, 530, 36);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawRecipientPlaque(ctx, templateId, x, y, width, height) {
+      ctx.save();
+      const lobeRadius = Math.min(34, height * 0.28);
+
+      if (templateId === "gold-luxury") {
+        const gradient = ctx.createLinearGradient(x, y, x, y + height);
+        gradient.addColorStop(0, "#f4d99a");
+        gradient.addColorStop(1, "#c99d47");
+        ctx.fillStyle = gradient;
+        ctx.strokeStyle = "rgba(255, 239, 183, 0.85)";
+      } else if (templateId === "soft-light") {
+        const gradient = ctx.createLinearGradient(x, y, x, y + height);
+        gradient.addColorStop(0, "rgba(255, 255, 255, 0.96)");
+        gradient.addColorStop(1, "#fff4df");
+        ctx.fillStyle = gradient;
+        ctx.strokeStyle = "rgba(194, 145, 53, 0.55)";
+      } else {
+        const gradient = ctx.createLinearGradient(x, y, x, y + height);
+        gradient.addColorStop(0, "#dff6ee");
+        gradient.addColorStop(1, "#b7dfd2");
+        ctx.fillStyle = gradient;
+        ctx.strokeStyle = "rgba(194, 145, 53, 0.46)";
+      }
+
+      ctx.shadowColor = templateId === "gold-luxury" ? "rgba(0, 0, 0, 0.28)" : "rgba(103, 75, 24, 0.16)";
+      ctx.shadowBlur = 24;
+      ctx.shadowOffsetY = 10;
+      drawRoundedRect(ctx, x, y, width, height, 34);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(x + 16, y + height / 2, lobeRadius, Math.PI / 2, Math.PI * 1.5);
+      ctx.arc(x + width - 16, y + height / 2, lobeRadius, Math.PI * 1.5, Math.PI / 2);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.shadowColor = "transparent";
+      ctx.lineWidth = 3;
+      drawRoundedRect(ctx, x, y, width, height, 34);
+      ctx.stroke();
+
+      ctx.globalAlpha = 0.75;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x + 42, y + height / 2);
+      ctx.lineTo(x + 90, y + height / 2);
+      ctx.moveTo(x + width - 42, y + height / 2);
+      ctx.lineTo(x + width - 90, y + height / 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawLantern(ctx, x, y, scale, color, alpha = 0.8) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.lineCap = "round";
+      ctx.lineWidth = 4;
+
+      ctx.beginPath();
+      ctx.moveTo(40, 0);
+      ctx.lineTo(40, 20);
+      ctx.moveTo(24, 28);
+      ctx.lineTo(56, 28);
+      ctx.moveTo(22, 122);
+      ctx.lineTo(58, 122);
+      ctx.moveTo(40, 122);
+      ctx.lineTo(40, 142);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(26, 36);
+      ctx.bezierCurveTo(15, 54, 15, 94, 26, 112);
+      ctx.lineTo(54, 112);
+      ctx.bezierCurveTo(65, 94, 65, 54, 54, 36);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(31, 48);
+      ctx.bezierCurveTo(26, 64, 26, 86, 31, 100);
+      ctx.moveTo(49, 48);
+      ctx.bezierCurveTo(54, 64, 54, 86, 49, 100);
+      ctx.moveTo(40, 38);
+      ctx.lineTo(40, 114);
+      ctx.stroke();
+
+      ctx.fillStyle = color;
+      ctx.globalAlpha = alpha * 0.62;
+      ctx.beginPath();
+      ctx.moveTo(31, 104);
+      ctx.lineTo(49, 104);
+      ctx.lineTo(40, 120);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawTinySheep(ctx, x, y, scale = 1) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+      [0, 18, 36].forEach((offset, index) => {
+        ctx.beginPath();
+        ctx.arc(offset, index === 1 ? 0 : 4, 22, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+      ctx.beginPath();
+      ctx.arc(56, -8, 17, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#315f86";
+      ctx.beginPath();
+      ctx.arc(62, -10, 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#d7a84f";
+      ctx.beginPath();
+      ctx.arc(68, 4, 13, -0.4, Math.PI * 1.25);
+      ctx.fill();
+
+      ctx.strokeStyle = "#315f86";
+      ctx.lineWidth = 6;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(6, 22);
+      ctx.lineTo(6, 42);
+      ctx.moveTo(42, 22);
+      ctx.lineTo(42, 42);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function getTemplateFonts(templateId) {
+      return TEMPLATE_FONTS[templateId] || TEMPLATE_FONTS[DEFAULTS.templateId];
+    }
+
+    async function ensureExportFontsReady(templateId) {
+      if (!document.fonts) {
+        return;
+      }
+
+      const fonts = getTemplateFonts(templateId);
+      await Promise.all([
+        document.fonts.load(`700 72px ${fonts.heading}`),
+        document.fonts.load(`400 44px ${fonts.body}`),
+        document.fonts.load(`400 38px ${fonts.body}`)
+      ]);
+      await document.fonts.ready;
+    }
+
+    function setCanvasFont(ctx, weight, size, family = "\"IBM Plex Sans Arabic\", sans-serif") {
+      ctx.font = `${weight} ${size}px ${family}`;
+    }
+
+    function splitLongToken(ctx, token, maxWidth) {
+      if (ctx.measureText(token).width <= maxWidth) {
+        return [token];
+      }
+
+      const chunks = [];
+      let chunk = "";
+
+      [...token].forEach((char) => {
+        const testChunk = `${chunk}${char}`;
+        if (!chunk || ctx.measureText(testChunk).width <= maxWidth) {
+          chunk = testChunk;
+          return;
+        }
+
+        chunks.push(chunk);
+        chunk = char;
+      });
+
+      if (chunk) {
+        chunks.push(chunk);
+      }
+
+      return chunks;
+    }
+
+    function wrapLines(ctx, text, maxWidth, maxLines) {
+      const tokens = text.split(/\s+/).filter(Boolean).flatMap((word) => {
+        return splitLongToken(ctx, word, maxWidth).map((chunk, index) => ({
+          text: chunk,
+          joinWithSpace: index === 0
+        }));
+      });
+      const lines = [];
+      let line = "";
+
+      tokens.forEach((token) => {
+        const separator = line && token.joinWithSpace ? " " : "";
+        const testLine = line ? `${line}${separator}${token.text}` : token.text;
+        if (ctx.measureText(testLine).width <= maxWidth) {
+          line = testLine;
+          return;
+        }
+
+        if (line) {
+          lines.push(line);
+          line = token.text;
+        } else {
+          lines.push(token.text);
+        }
+      });
+
+      if (line) {
+        lines.push(line);
+      }
+
+      if (lines.length <= maxLines) {
+        return lines;
+      }
+
+      const visible = lines.slice(0, maxLines);
+      let last = visible[visible.length - 1];
+      while (ctx.measureText(`${last}...`).width > maxWidth && last.length > 1) {
+        last = last.slice(0, -1);
+      }
+      visible[visible.length - 1] = `${last}...`;
+      return visible;
+    }
+
+    function drawCenteredLines(ctx, lines, x, y, lineHeight) {
+      lines.forEach((line, index) => {
+        ctx.fillText(line, x, y + index * lineHeight);
+      });
+    }
+
+    function drawTemplateBackground(ctx, templateId) {
+      const width = 1080;
+      const height = 1080;
+
+      if (templateId === "gold-luxury") {
+        const gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, "#06182b");
+        gradient.addColorStop(0.52, "#082d2e");
+        gradient.addColorStop(1, "#063a2f");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = "rgba(246, 207, 118, 0.035)";
+        for (let x = -60; x < width; x += 42) {
+          for (let y = -60; y < height; y += 42) {
+            if ((x + y) % 84 === 0) {
+              ctx.fillRect(x, y, 20, 2);
+              ctx.fillRect(x + 9, y - 9, 2, 20);
+            }
+          }
+        }
+
+        const glow = ctx.createRadialGradient(540, 500, 80, 540, 500, 430);
+        glow.addColorStop(0, "rgba(255, 218, 133, 0.22)");
+        glow.addColorStop(1, "rgba(255, 218, 133, 0)");
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.strokeStyle = "rgba(246, 207, 118, 0.74)";
+        ctx.lineWidth = 4;
+        drawRoundedRect(ctx, 70, 70, 940, 940, 34);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(246, 207, 118, 0.28)";
+        ctx.lineWidth = 2;
+        drawRoundedRect(ctx, 104, 104, 872, 872, 28);
+        ctx.stroke();
+
+        drawArch(ctx, 350, 190, 380, 600, "#f6cf76", 0.18);
+        drawCornerOrnaments(ctx, "#f6cf76", 0.42);
+        drawTextPlate(ctx, templateId);
+        drawGeometricPattern(ctx, 118, 804, 156, "#f6cf76", 0.13);
+        drawKaaba(ctx, 802, 820, 128, 114, "#d7ad57", 0.84);
+        drawLantern(ctx, 110, 290, 0.8, "#f6cf76", 0.78);
+        drawLantern(ctx, 890, 290, 0.8, "#f6cf76", 0.78);
+
+        drawCrescent(ctx, 190, 170, 58, "#f6cf76", "#0b1f34", 25);
+        drawStar(ctx, 846, 138, 28, 12, 4, "rgba(246, 207, 118, 0.86)");
+        drawStar(ctx, 908, 220, 18, 8, 4, "rgba(246, 207, 118, 0.72)");
+        drawStar(ctx, 156, 876, 20, 9, 4, "rgba(246, 207, 118, 0.54)");
+        return;
+      }
+
+      if (templateId === "soft-light") {
+        const gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, "#fffaf0");
+        gradient.addColorStop(0.55, "#fbf7ec");
+        gradient.addColorStop(1, "#ffffff");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = "rgba(210, 177, 102, 0.18)";
+        ctx.beginPath();
+        ctx.arc(190, 194, 142, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(132, 165, 122, 0.16)";
+        ctx.beginPath();
+        ctx.arc(890, 870, 190, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(191, 146, 62, 0.032)";
+        for (let x = 92; x < 990; x += 46) {
+          for (let y = 92; y < 990; y += 46) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(Math.PI / 4);
+            ctx.fillRect(-8, -8, 16, 16);
+            ctx.restore();
+          }
+        }
+
+        ctx.fillStyle = "rgba(203, 166, 88, 0.18)";
+        ctx.save();
+        ctx.translate(860, 170);
+        ctx.rotate(-0.28);
+        drawRoundedRect(ctx, -160, -48, 360, 96, 48);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.strokeStyle = "rgba(109, 142, 169, 0.2)";
+        ctx.lineWidth = 4;
+        drawRoundedRect(ctx, 74, 74, 932, 932, 34);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(194, 145, 53, 0.46)";
+        ctx.lineWidth = 3;
+        drawRoundedRect(ctx, 106, 106, 868, 868, 26);
+        ctx.stroke();
+
+        drawCornerOrnaments(ctx, "#c29135", 0.35);
+        drawTextPlate(ctx, templateId);
+        drawArch(ctx, 762, 702, 174, 230, "#0b6c60", 0.1);
+        drawGeometricPattern(ctx, 146, 818, 124, "#c29135", 0.12);
+        drawLantern(ctx, 118, 306, 0.72, "#c29135", 0.62);
+        drawLantern(ctx, 902, 306, 0.72, "#c29135", 0.62);
+
+        drawCrescent(ctx, 888, 152, 50, "#c89b4a", "#fff7e9", 21);
+        drawStar(ctx, 190, 870, 24, 10, 4, "rgba(122, 162, 123, 0.42)");
+        drawStar(ctx, 258, 920, 16, 7, 4, "rgba(122, 162, 123, 0.34)");
+        return;
+      }
+
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, "#dff8ef");
+      gradient.addColorStop(0.53, "#55cbb9");
+      gradient.addColorStop(1, "#2c5e84");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
+      for (let x = -30; x < width; x += 38) {
+        for (let y = -30; y < height; y += 38) {
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.PI / 4);
+          ctx.fillRect(-7, -7, 14, 14);
+          ctx.restore();
+        }
+      }
+
+      ctx.fillStyle = "rgba(255, 255, 255, 0.54)";
+      drawRoundedRect(ctx, 150, 280, 780, 540, 38);
+      ctx.fill();
+
+      ctx.strokeStyle = "rgba(23, 32, 51, 0.18)";
+      ctx.lineWidth = 5;
+      drawRoundedRect(ctx, 74, 74, 932, 932, 34);
+      ctx.stroke();
+      drawCornerOrnaments(ctx, "#0f3557", 0.18);
+
+      const confetti = [
+        [150, 190, "#d7a84f"], [248, 142, "#ffffff"], [855, 186, "#f2c670"],
+        [910, 338, "#ffffff"], [175, 742, "#0f766e"], [860, 840, "#d7a84f"],
+        [286, 902, "#315f86"], [742, 122, "#0f3557"]
+      ];
+      confetti.forEach(([x, y, color], index) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(index * 0.42);
+        ctx.fillStyle = color;
+        drawRoundedRect(ctx, -18, -8, 36, 16, 5);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      drawTextPlate(ctx, templateId);
+      drawGeometricPattern(ctx, 118, 790, 148, "#0f3557", 0.13);
+      drawTinySheep(ctx, 822, 840, 0.82);
+      drawLantern(ctx, 128, 154, 0.55, "#b98a35", 0.58);
+      drawLantern(ctx, 890, 130, 0.62, "#b98a35", 0.58);
+      drawCrescent(ctx, 180, 160, 52, "#ffffff", "#e4f7f1", 22);
+      drawStar(ctx, 880, 882, 28, 12, 4, "rgba(255, 255, 255, 0.76)");
+    }
+
+    const templateImageCache = new Map();
+
+    function getTemplateConfig(templateId) {
+      return TEMPLATE_CONFIG[templateId] || TEMPLATE_CONFIG[DEFAULTS.templateId];
+    }
+
+    function loadTemplateImage(templateId) {
+      const config = getTemplateConfig(templateId);
+      if (templateImageCache.has(templateId)) {
+        return templateImageCache.get(templateId);
+      }
+
+      const imagePromise = new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error("تعذر تحميل خلفية القالب."));
+        image.src = window.TEMPLATE_IMAGE_DATA?.[templateId] || config.image;
+      });
+
+      templateImageCache.set(templateId, imagePromise);
+      return imagePromise;
+    }
+
+    function getCanvasBox(box, width, height) {
+      const boxWidth = box.width * width;
+      const boxHeight = box.height * height;
+      const paddingX = boxWidth * (box.paddingX || 0);
+      const paddingY = boxHeight * (box.paddingY || 0);
+      return {
+        x: box.x * width,
+        y: box.y * height,
+        width: boxWidth - paddingX * 2,
+        height: boxHeight - paddingY * 2
+      };
+    }
+
+    function fitLinesToBox(ctx, text, box, fontFamily, options) {
+      for (let size = options.size; size >= options.minSize; size -= 2) {
+        setCanvasFont(ctx, options.weight, size, fontFamily);
+        const lineHeight = size * options.lineHeight;
+        const lines = wrapLines(ctx, text, box.width, options.maxLines);
+        if (lines.length * lineHeight <= box.height * 0.92) {
+          return { lines, size, lineHeight };
+        }
+      }
+
+      setCanvasFont(ctx, options.weight, options.minSize, fontFamily);
+      return {
+        lines: wrapLines(ctx, text, box.width, options.maxLines),
+        size: options.minSize,
+        lineHeight: options.minSize * options.lineHeight
+      };
+    }
+
+    function drawTextBox(ctx, text, box, fontFamily, color, options) {
+      if (!text) {
+        return;
+      }
+
+      const fitted = fitLinesToBox(ctx, text, box, fontFamily, options);
+      setCanvasFont(ctx, options.weight, fitted.size, fontFamily);
+      ctx.fillStyle = color;
+      ctx.textBaseline = "middle";
+
+      const firstLineY = box.y - ((fitted.lines.length - 1) * fitted.lineHeight) / 2;
+      fitted.lines.forEach((line, index) => {
+        ctx.fillText(line, box.x, firstLineY + index * fitted.lineHeight);
+      });
+    }
+
+    async function drawCardToCanvas(state) {
+      const config = getTemplateConfig(state.templateId);
+      const image = await loadTemplateImage(state.templateId);
+      const canvas = document.createElement("canvas");
+      canvas.width = image.naturalWidth || config.width;
+      canvas.height = image.naturalHeight || config.height;
+      const ctx = canvas.getContext("2d");
+      const fonts = getTemplateFonts(state.templateId);
+      const colors = config.colors;
+
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      ctx.direction = "rtl";
+      ctx.textAlign = "center";
+      ctx.shadowColor = "rgba(255, 255, 255, 0.22)";
+      ctx.shadowBlur = 2;
+      ctx.shadowOffsetY = 1;
+
+      drawTextBox(
+        ctx,
+        state.recipientName,
+        getCanvasBox(config.boxes.recipient, canvas.width, canvas.height),
+        fonts.heading,
+        colors.recipient,
+        config.boxes.recipient
+      );
+
+      ctx.shadowColor = "transparent";
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
+
+      drawTextBox(
+        ctx,
+        state.greetingText,
+        getCanvasBox(config.boxes.greeting, canvas.width, canvas.height),
+        fonts.body,
+        colors.greeting,
+        config.boxes.greeting
+      );
+
+      drawTextBox(
+        ctx,
+        state.senderName,
+        getCanvasBox(config.boxes.sender, canvas.width, canvas.height),
+        fonts.body,
+        colors.sender,
+        config.boxes.sender
+      );
+
+      return canvas;
+    }
+
+    function canvasToBlob(canvas) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            resolve(blob);
+            return;
+          }
+          reject(new Error("تعذر إنشاء الصورة."));
+        }, "image/png");
+      });
+    }
+
+    function downloadBlob(blob, state) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const safeName = state.recipientName.replace(/[\\/:*?"<>|]/g, "").slice(0, 30) || "eid-card";
+      link.href = url;
+      link.download = `بطاقة-أضحى-${safeName}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    async function createCardBlob() {
+      const state = getState();
+      await ensureExportFontsReady(state.templateId);
+      const canvas = await drawCardToCanvas(state);
+      const blob = await canvasToBlob(canvas);
+      return { state, blob };
+    }
+
+    function copyTextWithTextarea(text) {
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      temp.setAttribute("readonly", "");
+      temp.dir = "rtl";
+      temp.style.position = "fixed";
+      temp.style.inset = "0 auto auto 0";
+      temp.style.opacity = "0";
+      document.body.appendChild(temp);
+      temp.select();
+      temp.setSelectionRange(0, temp.value.length);
+
+      const copied = document.execCommand && document.execCommand("copy");
+      temp.remove();
+
+      if (!copied) {
+        throw new Error("تعذر نسخ النص.");
+      }
+    }
+
+    async function copyShareText(state = getState()) {
+      const text = buildShareText(state);
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        try {
+          await navigator.clipboard.writeText(text);
+          return;
+        } catch (error) {
+          // بعض المتصفحات ترفض Clipboard API خارج HTTPS أو بدون تفاعل مباشر.
+        }
+      }
+
+      copyTextWithTextarea(text);
+    }
+
+    async function handleDownload() {
+      try {
+        setStatus("جاري تجهيز الصورة...");
+        const { state, blob } = await createCardBlob();
+        downloadBlob(blob, state);
+        setStatus("تم تجهيز ملف PNG للتحميل.");
+      } catch (error) {
+        setStatus(error.message || "تعذر تحميل الصورة.", true);
+      }
+    }
+
+    async function handleShare() {
+      try {
+        setStatus("جاري تجهيز المشاركة...");
+        const { state, blob } = await createCardBlob();
+        const text = buildShareText(state);
+        const file = new File([blob], "eid-card.png", { type: "image/png" });
+
+        if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
+          await navigator.share({
+            title: "بطاقة عيد الأضحى",
+            text,
+            files: [file]
+          });
+          setStatus("تم فتح نافذة المشاركة.");
+          return;
+        }
+
+        if (navigator.share) {
+          await navigator.share({
+            title: "بطاقة عيد الأضحى",
+            text
+          });
+          downloadBlob(blob, state);
+          await copyShareText(state);
+          setStatus("تمت مشاركة النص، وحُمّلت الصورة ونُسخ النص كاحتياط.");
+          return;
+        }
+
+        downloadBlob(blob, state);
+        await copyShareText(state);
+        setStatus("المشاركة غير مدعومة هنا، لذلك حُمّلت الصورة ونُسخ نص التهنئة.");
+      } catch (error) {
+        if (error.name === "AbortError") {
+          setStatus("تم إلغاء المشاركة.");
+          return;
+        }
+
+        try {
+          const { state, blob } = await createCardBlob();
+          downloadBlob(blob, state);
+          await copyShareText(state);
+          setStatus("تعذرت المشاركة، لذلك حُمّلت الصورة ونُسخ النص.", true);
+        } catch (fallbackError) {
+          setStatus(fallbackError.message || "تعذرت المشاركة والتحميل.", true);
+        }
+      }
+    }
+
+    async function handleCopy() {
+      try {
+        await copyShareText();
+        setStatus("تم نسخ نص التهنئة.");
+      } catch (error) {
+        setStatus("تعذر نسخ النص من المتصفح الحالي.", true);
+      }
+    }
+
+    document.querySelectorAll("input[name='template']").forEach((input) => {
+      input.addEventListener("change", () => {
+        if (!hasUserEditedText) {
+          applyTemplateTextDefaults(input.value);
+        } else {
+          setInputPlaceholders(input.value);
+        }
+        updatePreview();
+        setStatus(`تم اختيار قالب ${TEMPLATE_NAMES[input.value]}.`);
+      });
+    });
+
+    [elements.recipient, elements.greeting, elements.sender].forEach((input) => {
+      input.addEventListener("input", () => {
+        hasUserEditedText = true;
+        updatePreview();
+        setStatus("");
+      });
+    });
+
+    elements.download.addEventListener("click", handleDownload);
+    elements.share.addEventListener("click", handleShare);
+    elements.copy.addEventListener("click", handleCopy);
+
+    setInputPlaceholders(DEFAULTS.templateId);
+    updatePreview();
+  </script>
+</body>
+</html>
