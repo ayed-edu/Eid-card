@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>بطاقة عيد الأضحى</title>
+  <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
@@ -45,6 +46,129 @@
 
     button {
       cursor: pointer;
+    }
+
+    .site-header {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 16px 0;
+    }
+
+    .site-header-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(27, 39, 65, 0.07);
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .header-group {
+      padding: 20px 16px 16px;
+      text-align: center;
+      background: linear-gradient(160deg, #f2fbf2, #fffdf0);
+    }
+
+    .group-logo {
+      display: block;
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+    }
+
+    .group-name {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a5c08;
+    }
+
+    .group-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #0088cc;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      direction: ltr;
+    }
+
+    .group-link:hover {
+      text-decoration: underline;
+    }
+
+    .group-link svg,
+    .social-chip svg {
+      flex-shrink: 0;
+    }
+
+    .header-sep {
+      height: 1px;
+      background: var(--line);
+    }
+
+    .header-dev {
+      padding: 14px 16px 18px;
+      text-align: center;
+      background: #f8fafc;
+    }
+
+    .dev-title {
+      margin: 0 0 6px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: #26334d;
+    }
+
+    .dev-bio {
+      margin: 0 0 10px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .dev-follow {
+      margin: 0 0 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #26334d;
+    }
+
+    .dev-social {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .social-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 160ms ease;
+      direction: ltr;
+    }
+
+    .social-chip:hover {
+      opacity: 0.78;
+    }
+
+    .social-chip.tg {
+      background: #e3f4fc;
+      color: #0077b5;
+    }
+
+    .social-chip.x {
+      background: #ebebeb;
+      color: #0f0f0f;
     }
 
     .app-header {
@@ -104,6 +228,40 @@
       color: #26334d;
       font-weight: 700;
       font-size: 0.95rem;
+    }
+
+    .relation-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #26334d;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 140ms ease, border-color 140ms ease;
+    }
+
+    .pill:hover {
+      background: #eefaf8;
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+
+    .pill.active {
+      background: #eefaf8;
+      border-color: var(--accent);
+      color: var(--accent-dark);
     }
 
     input,
@@ -184,48 +342,34 @@
 
     .swatch {
       width: 100%;
-      height: 34px;
+      height: 80px;
       border-radius: 6px;
       border: 1px solid rgba(23, 32, 51, 0.12);
     }
 
-    .swatch.gold {
-      background:
-        radial-gradient(circle at 78% 30%, #f4d27a 0 8%, transparent 9%),
-        linear-gradient(90deg, transparent 0 38%, rgba(241, 196, 92, 0.75) 39% 61%, transparent 62%),
-        linear-gradient(135deg, #07182b, #05372f 68%, #c79a48);
-    }
-
-    .swatch.soft {
-      background:
-        linear-gradient(90deg, rgba(194, 145, 53, 0.65) 0 2px, transparent 2px calc(100% - 2px), rgba(194, 145, 53, 0.65) calc(100% - 2px)),
-        radial-gradient(circle at 24% 34%, rgba(198, 170, 99, 0.2) 0 18%, transparent 19%),
-        linear-gradient(135deg, #fffaf0, #f7f3e9 58%, #ffffff);
-    }
-
-    .swatch.playful {
-      background:
-        radial-gradient(circle at 76% 28%, #ffffff 0 10%, transparent 11%),
-        linear-gradient(135deg, #dff8ef, #53d0b9 54%, #2c5e84);
-    }
-
     .swatch.luxury-dark {
-      background: url("assets/templates/eid-luxury-dark.png") center 42% / cover;
+      background: url("assets/templates/eid-luxury-dark.png") center 10% / cover;
     }
 
     .swatch.cream-gold {
-      background: url("assets/templates/eid-cream-gold.png") center 42% / cover;
+      background: url("assets/templates/eid-cream-gold.png") center 10% / cover;
     }
 
     .swatch.soft-green {
-      background: url("assets/templates/eid-soft-green.png") center 42% / cover;
+      background: url("assets/templates/eid-soft-green.png") center 10% / cover;
     }
 
     .actions {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
       margin-top: 16px;
+    }
+
+    #downloadBtn {
+      grid-column: 1 / -1;
+      min-height: 50px;
+      font-size: 1.05rem;
     }
 
     .btn {
@@ -268,6 +412,12 @@
       background: #eef2f7;
     }
 
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
     .status {
       min-height: 28px;
       margin: 12px 0 0;
@@ -277,6 +427,22 @@
 
     .status.error {
       color: var(--danger);
+    }
+
+    .char-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: left;
+      margin-top: -2px;
+    }
+
+    .char-count.near-limit {
+      color: #92400e;
+    }
+
+    .char-count.at-limit {
+      color: var(--danger);
+      font-weight: 700;
     }
 
     .preview-panel {
@@ -1169,6 +1335,39 @@
   </style>
 </head>
 <body>
+  <div class="site-header" role="banner">
+    <div class="site-header-card">
+
+      <div class="header-group">
+        <img src="assets/images/logo.jpg" alt="شعار قروب بالعطاء نسمو" class="group-logo">
+        <p class="group-name">إهداء من قروب بالعطاء نسمو</p>
+        <a href="https://t.me/Teacherhmdah" target="_blank" rel="noopener" class="group-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          t.me/Teacherhmdah
+        </a>
+      </div>
+
+      <div class="header-sep" aria-hidden="true"></div>
+
+      <div class="header-dev">
+        <p class="dev-title">برمجة وتصميم: عائض | دروس تفاعلية</p>
+        <p class="dev-bio">من قلب الميدان، أصمّم أدوات تفاعلية تخلي حصتك أمتع، وفصلك أنشط، ودورك موجّه وميسّر… بدون ما تستهلك صوتك</p>
+        <p class="dev-follow">تابعني</p>
+        <div class="dev-social">
+          <a href="https://t.me/ayed_edu" target="_blank" rel="noopener" class="social-chip tg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            @ayed_edu
+          </a>
+          <a href="https://x.com/Ayed_Edu" target="_blank" rel="noopener" class="social-chip x">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            @Ayed_Edu
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <header class="app-header">
     <h1>بطاقة عيد الأضحى</h1>
     <p>اختر تصميمًا بروح الحج والأضحى، اكتب الاسم، وحمّل بطاقتك الجاهزة للمشاركة.</p>
@@ -1201,17 +1400,28 @@
 
       <div class="form-group">
         <label for="recipientName">اسم المهدى إليه</label>
+        <div class="relation-pills" id="relationPills" role="group" aria-label="اختر العلاقة">
+          <button type="button" class="pill" data-relation="أبي الغالي">أبي</button>
+          <button type="button" class="pill" data-relation="أمي الغالية">أمي</button>
+          <button type="button" class="pill" data-relation="أخي الغالي">أخي</button>
+          <button type="button" class="pill" data-relation="أختي الغالية">أختي</button>
+          <button type="button" class="pill" data-relation="زوجتي الغالية">زوجتي</button>
+          <button type="button" class="pill" data-relation="صديقي الغالي">صديقي</button>
+        </div>
         <input id="recipientName" type="text" maxlength="40" value="والدي الغالي محمد" placeholder="والدي الغالي محمد" autocomplete="off">
+        <span class="char-count" id="recipientCount" aria-live="polite"></span>
       </div>
 
       <div class="form-group">
         <label for="greetingText">عبارة التهنئة</label>
         <textarea id="greetingText" maxlength="120">كل عام وأنت بخير، تقبّل الله طاعتك، وأدام عليك الصحة والرضا.</textarea>
+        <span class="char-count" id="greetingCount" aria-live="polite"></span>
       </div>
 
       <div class="form-group">
         <label for="senderName">اسم المرسل</label>
         <input id="senderName" type="text" maxlength="40" value="ابنك المحب" placeholder="ابنك المحب" autocomplete="off">
+        <span class="char-count" id="senderCount" aria-live="polite"></span>
       </div>
 
       <div class="actions">
@@ -1349,7 +1559,10 @@
       status: document.getElementById("statusMessage"),
       download: document.getElementById("downloadBtn"),
       share: document.getElementById("shareBtn"),
-      copy: document.getElementById("copyBtn")
+      copy: document.getElementById("copyBtn"),
+      recipientCount: document.getElementById("recipientCount"),
+      greetingCount: document.getElementById("greetingCount"),
+      senderCount: document.getElementById("senderCount")
     };
 
     let hasUserEditedText = false;
@@ -1393,6 +1606,21 @@
     function setStatus(message, isError = false) {
       elements.status.textContent = message;
       elements.status.classList.toggle("error", isError);
+    }
+
+    function updateCharCount(input, countEl) {
+      const max = Number(input.getAttribute("maxlength"));
+      const len = input.value.length;
+      const remaining = max - len;
+      countEl.textContent = `${len} / ${max}`;
+      countEl.className = "char-count" +
+        (remaining <= 5 ? " at-limit" : remaining <= 15 ? " near-limit" : "");
+    }
+
+    function updateAllCharCounts() {
+      updateCharCount(elements.recipient, elements.recipientCount);
+      updateCharCount(elements.greeting, elements.greetingCount);
+      updateCharCount(elements.sender, elements.senderCount);
     }
 
     function updateTextSizing(state) {
@@ -2264,6 +2492,22 @@
       }
     }
 
+    document.querySelectorAll("#relationPills .pill").forEach((pill) => {
+      pill.addEventListener("click", () => {
+        elements.recipient.value = pill.dataset.relation;
+        hasUserEditedText = true;
+        updatePreview();
+        updateAllCharCounts();
+        setStatus("");
+        document.querySelectorAll("#relationPills .pill").forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+      });
+    });
+
+    elements.recipient.addEventListener("input", () => {
+      document.querySelectorAll("#relationPills .pill").forEach((p) => p.classList.remove("active"));
+    });
+
     document.querySelectorAll("input[name='template']").forEach((input) => {
       input.addEventListener("change", () => {
         if (!hasUserEditedText) {
@@ -2272,6 +2516,7 @@
           setInputPlaceholders(input.value);
         }
         updatePreview();
+        updateAllCharCounts();
         setStatus(`تم اختيار قالب ${TEMPLATE_NAMES[input.value]}.`);
       });
     });
@@ -2280,16 +2525,36 @@
       input.addEventListener("input", () => {
         hasUserEditedText = true;
         updatePreview();
+        updateAllCharCounts();
         setStatus("");
       });
     });
 
-    elements.download.addEventListener("click", handleDownload);
-    elements.share.addEventListener("click", handleShare);
-    elements.copy.addEventListener("click", handleCopy);
+    async function withLoading(btn, loadingLabel, action) {
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = loadingLabel;
+      try {
+        await action();
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    }
+
+    elements.download.addEventListener("click", () =>
+      withLoading(elements.download, "جاري التجهيز…", handleDownload)
+    );
+    elements.share.addEventListener("click", () =>
+      withLoading(elements.share, "جاري التجهيز…", handleShare)
+    );
+    elements.copy.addEventListener("click", () =>
+      withLoading(elements.copy, "جاري النسخ…", handleCopy)
+    );
 
     setInputPlaceholders(DEFAULTS.templateId);
     updatePreview();
+    updateAllCharCounts();
   </script>
 </body>
 </html>
