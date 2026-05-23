@@ -1430,6 +1430,12 @@
 
       <div class="form-group">
         <label for="senderName">اسم المرسل</label>
+        <div class="relation-pills" id="senderPills" role="group" aria-label="اختر صفة المرسل">
+          <button type="button" class="pill" data-sender="ابنك المحب">ابني</button>
+          <button type="button" class="pill" data-sender="ابنتك المحبة">ابنتي</button>
+          <button type="button" class="pill" data-sender="زوجك المحب">زوجي</button>
+          <button type="button" class="pill" data-sender="صديقتك">صديقتي</button>
+        </div>
         <input id="senderName" type="text" maxlength="40" value="ابنك المحب" placeholder="ابنك المحب" autocomplete="off">
         <span class="char-count" id="senderCount" aria-live="polite"></span>
       </div>
@@ -2515,6 +2521,22 @@
 
     elements.recipient.addEventListener("input", () => {
       document.querySelectorAll("#relationPills .pill").forEach((p) => p.classList.remove("active"));
+    });
+
+    document.querySelectorAll("#senderPills .pill").forEach((pill) => {
+      pill.addEventListener("click", () => {
+        elements.sender.value = pill.dataset.sender;
+        hasUserEditedText = true;
+        updatePreview();
+        updateAllCharCounts();
+        setStatus("");
+        document.querySelectorAll("#senderPills .pill").forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+      });
+    });
+
+    elements.sender.addEventListener("input", () => {
+      document.querySelectorAll("#senderPills .pill").forEach((p) => p.classList.remove("active"));
     });
 
     document.querySelectorAll("input[name='template']").forEach((input) => {
