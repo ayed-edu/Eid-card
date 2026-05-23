@@ -438,6 +438,57 @@
       transform: none !important;
     }
 
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+    .modal-overlay[hidden] { display: none; }
+    .modal-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.25rem;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    .modal-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0;
+      color: #1a2235;
+    }
+    .modal-textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 0.65rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      resize: vertical;
+      box-sizing: border-box;
+      direction: rtl;
+      color: #1a2235;
+    }
+    .modal-textarea:focus {
+      outline: none;
+      border-color: #c9a84c;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .modal-actions .btn { flex: 1; }
+
     .status {
       min-height: 28px;
       margin: 12px 0 0;
@@ -2423,8 +2474,8 @@
       }
     }
 
-    async function copyShareText(state = getState()) {
-      const text = buildShareText(state);
+    async function copyShareText(state = getState(), overrideText = null) {
+      const text = overrideText ?? buildShareText(state);
       if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
         try {
           await navigator.clipboard.writeText(text);
@@ -2448,11 +2499,48 @@
       }
     }
 
+    function showShareModal(defaultText) {
+      return new Promise((resolve) => {
+        const modal = document.getElementById("shareModal");
+        const textarea = document.getElementById("shareTextarea");
+        const confirmBtn = document.getElementById("shareConfirmBtn");
+        const cancelBtn = document.getElementById("shareCancelBtn");
+
+        textarea.value = defaultText;
+        modal.removeAttribute("hidden");
+        textarea.focus();
+
+        function close(result) {
+          modal.setAttribute("hidden", "");
+          confirmBtn.removeEventListener("click", onConfirm);
+          cancelBtn.removeEventListener("click", onCancel);
+          modal.removeEventListener("click", onOverlay);
+          resolve(result);
+        }
+
+        function onConfirm() { close(textarea.value.trim() || defaultText); }
+        function onCancel() { close(null); }
+        function onOverlay(e) { if (e.target === modal) close(null); }
+
+        confirmBtn.addEventListener("click", onConfirm);
+        cancelBtn.addEventListener("click", onCancel);
+        modal.addEventListener("click", onOverlay);
+      });
+    }
+
     async function handleShare() {
       try {
         setStatus("جاري تجهيز المشاركة...");
         const { state, blob } = await createCardBlob();
-        const text = buildShareText(state);
+        const defaultText = buildShareText(state);
+
+        const confirmedText = await showShareModal(defaultText);
+        if (confirmedText === null) {
+          setStatus("");
+          return;
+        }
+
+        const text = confirmedText;
         const file = new File([blob], "eid-card.png", { type: "image/png" });
 
         if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
@@ -2471,13 +2559,13 @@
             text
           });
           downloadBlob(blob, state);
-          await copyShareText(state);
+          await copyShareText(state, text);
           setStatus("تمت مشاركة النص، وحُمّلت الصورة ونُسخ النص كاحتياط.");
           return;
         }
 
         downloadBlob(blob, state);
-        await copyShareText(state);
+        await copyShareText(state, text);
         setStatus("المشاركة غير مدعومة هنا، لذلك حُمّلت الصورة ونُسخ نص التهنئة.");
       } catch (error) {
         if (error.name === "AbortError") {
@@ -2569,5 +2657,16 @@
     updatePreview();
     updateAllCharCounts();
   </script>
+
+  <div id="shareModal" class="modal-overlay" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+      <p class="modal-title" id="shareModalTitle">راجع نص المشاركة قبل الإرسال</p>
+      <textarea id="shareTextarea" class="modal-textarea" rows="5"></textarea>
+      <div class="modal-actions">
+        <button type="button" class="btn" id="shareConfirmBtn">إرسال</button>
+        <button type="button" class="btn neutral" id="shareCancelBtn">إلغاء</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
